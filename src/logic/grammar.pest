@@ -1,0 +1,20 @@
+ident = @{ XID_START ~ (XID_CONTINUE | "'")* }
+transition = @{ ident ~ ("[" ~ ident ~ "]")? }
+num = @{ ASCII_DIGIT+ }
+
+logic_operator = _{ and | or }
+  and = { "+" }
+  or = { "|" }
+
+comparison_operator = { "<=" | ">=" | "<" | "=" | ">" }
+
+logic_operation = _{ logic_term ~ (logic_operator ~ logic_term)* }
+comparison_operation = _{ ident ~ comparison_operator ~ num }
+paren_expression = { "(" ~ (logic_operation | comparison_operation) ~ ")"}
+
+term = _{ num | logic_term }
+logic_term = _{ comparison_operation | transition | ident | paren_expression }
+
+logic = _{ SOI ~ logic_operation+ ~ EOI }
+
+WHITESPACE = _{ " " | "\t" }
