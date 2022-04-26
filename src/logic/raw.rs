@@ -188,6 +188,14 @@ fn comparison() {
             ),
         ),
     );
+    assert_eq!(
+        parse("foo's<4"),
+        RawLogic::comparison(
+            RawLogic::ident("foo's"),
+            ComparisonOp::Less,
+            RawLogic::Num(4)
+        ),
+    );
 }
 
 #[test]
