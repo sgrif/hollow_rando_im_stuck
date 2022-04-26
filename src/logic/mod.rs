@@ -3,6 +3,9 @@ use serde::{de, Deserialize, Deserializer};
 use std::error::Error;
 use std::str::FromStr;
 
+pub use manager::Manager;
+
+mod manager;
 mod raw;
 
 #[derive(PartialEq, Eq, Debug, Clone)]
@@ -50,6 +53,15 @@ impl Condition {
                 }
             }
             Num(_) => Err("found number used in boolean context".into()),
+        }
+    }
+
+    pub(crate) fn is_met(&self, lm: &Manager) -> bool {
+        match self {
+            Self::And(left, right) => left.is_met(lm) && right.is_met(lm),
+            Self::Or(left, right) => left.is_met(lm) || right.is_met(lm),
+            Self::LessThan(name, amt) => lm.acquired_amount(name) < *amt as i32,
+            Self::GreaterThan(name, amt) => lm.acquired_amount(name) > *amt as i32,
         }
     }
 }
