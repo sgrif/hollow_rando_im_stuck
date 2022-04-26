@@ -4,7 +4,7 @@ use std::str::FromStr;
 
 #[derive(PartialEq, Eq, Debug, Clone, pest_derive::Parser)]
 #[grammar = "logic/grammar.pest"]
-enum RawLogic {
+pub(super) enum RawLogic {
     Ident(String),
     Num(u8),
     And(Box<RawLogic>, Box<RawLogic>),
@@ -13,19 +13,19 @@ enum RawLogic {
 }
 
 impl RawLogic {
-    fn ident(ident: impl Display) -> Self {
+    pub(super) fn ident(ident: impl Display) -> Self {
         RawLogic::Ident(ident.to_string())
     }
 
-    fn and(left: Self, right: Self) -> Self {
+    pub(super) fn and(left: Self, right: Self) -> Self {
         RawLogic::And(Box::new(left), Box::new(right))
     }
 
-    fn or(left: Self, right: Self) -> Self {
+    pub(super) fn or(left: Self, right: Self) -> Self {
         RawLogic::Or(Box::new(left), Box::new(right))
     }
 
-    fn comparison(left: Self, op: ComparisonOp, right: Self) -> Self {
+    pub(super) fn comparison(left: Self, op: ComparisonOp, right: Self) -> Self {
         RawLogic::Comparison(Box::new(left), op, Box::new(right))
     }
 }
@@ -75,7 +75,7 @@ impl FromStr for RawLogic {
 }
 
 #[derive(PartialEq, Eq, Debug, Clone, Copy)]
-enum ComparisonOp {
+pub(super) enum ComparisonOp {
     Less,
     LessOrEqual,
     Equal,
