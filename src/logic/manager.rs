@@ -86,7 +86,7 @@ impl Manager {
     }
 
     fn already_unlocked(&self, item: &str) -> bool {
-        self.acquired_amount(item) == 0
+        self.acquired_amount(item) != 0
     }
 }
 
