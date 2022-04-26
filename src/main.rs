@@ -1,12 +1,25 @@
-use std::env::args_os;
+use clap::Parser;
 use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::process::exit;
 
 pub(crate) mod logic;
 pub(crate) mod spoiler_log;
+
+#[derive(Parser)]
+struct Cli {
+    /// The path to the directory containing your Randomizer spoiler logs. For example,
+    /// "%USERPROFILE%\AppData\LocalLow\Team Cherry\Hollow Knight\Randomizer 4\user1"
+    path: PathBuf,
+    /// When enabled, lists the locations unlocked by each item, rather than only showing a count
+    #[clap(long)]
+    show_unlocked_locations: bool,
+    /// When enabled, shows the name of the item at each location.
+    #[clap(long)]
+    show_items: bool,
+}
 
 fn main() {
     if let Err(e) = try_main() {
@@ -16,11 +29,9 @@ fn main() {
 }
 
 fn try_main() -> Result<(), Box<dyn Error>> {
-    let args = args_os().skip(1).collect::<Vec<_>>();
-    assert_eq!(args.len(), 1, "expected a single argument");
-    let path = Path::new(&args[0]);
-    let spoiler_path = path.join("RawSpoiler.json");
-    let tracker_path = path.join("TrackerDataWithoutSequenceBreaksPM.txt");
+    let cli = Cli::parse();
+    let spoiler_path = cli.path.join("RawSpoiler.json");
+    let tracker_path = cli.path.join("TrackerDataWithoutSequenceBreaksPM.txt");
     let logic_manager =
         logic::Manager::new(deserialize(&spoiler_path)?, deserialize(&tracker_path)?);
 
@@ -32,12 +43,20 @@ fn try_main() -> Result<(), Box<dyn Error>> {
     }
 
     for key_item in key_items {
-        println!(
-            "Getting {} at {} will unlock:",
-            key_item.item, key_item.location
-        );
-        for location in key_item.unlocked_locations {
-            println!("- {}", location);
+        print!("Getting ");
+        if cli.show_items {
+            print!("{}", key_item.item);
+        } else {
+            print!("the item");
+        }
+        print!(" at {} will unlock", key_item.location);
+        if cli.show_unlocked_locations {
+            println!(":");
+            for location in key_item.unlocked_locations {
+                println!("- {}", location);
+            }
+        } else {
+            println!(" {} locations", key_item.unlocked_locations.len());
         }
     }
 

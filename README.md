@@ -21,6 +21,12 @@ On Windows with the default save locations, this would look like
 The path must be a directory containing `RawSpoilerLog.json` and
 `TrackerDataWithoutSequenceBreaksPM.txt`
 
+By default, the tool will tell you the locations you should check, and how many
+new locations will be unlocked by checking it. For example, "Getting the item at
+Grubfather will unlock 13 locations". You can get the name of the item to pick
+up by passing `--show-items`, and get the names of the locations each item
+unlocks by passing `--show-unlocked-locations`.
+
 Development Status
 ---
 
