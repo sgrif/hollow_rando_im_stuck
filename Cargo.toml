@@ -12,3 +12,4 @@ pest_derive = "2.1.0"
 lazy_static = "1.4.0"
 serde_jsonrc = "0.1.0"
 serde = { version = "1.0.0", features = ["derive"] }
+itertools = "0.10.0"

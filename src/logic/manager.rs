@@ -1,12 +1,13 @@
 use super::Condition;
 use crate::spoiler_log::{Item, RawSpoiler};
+use itertools::Itertools;
 use std::collections::{HashMap, HashSet};
 use std::rc::Rc;
 
 #[derive(Clone)]
 pub struct Manager {
     pub locations: Rc<HashMap<String, Condition>>,
-    items: Rc<HashMap<String, Item>>,
+    items: Rc<HashMap<String, Vec<Item>>>,
     acquired: HashMap<String, i32>,
 }
 
@@ -26,7 +27,7 @@ impl Manager {
                 let value = placement.item.inner;
                 (key, value)
             })
-            .collect();
+            .into_group_map();
         Self {
             locations: Rc::new(locations),
             items: Rc::new(items),
@@ -38,7 +39,7 @@ impl Manager {
         let reachable_locations = self.reachable_locations().collect::<HashSet<_>>();
         reachable_locations
             .iter()
-            .filter_map(|location| self.item_at(location).map(|l| (location, l)))
+            .flat_map(|location| self.items_at(location).iter().map(move |l| (location, l)))
             .filter_map(|(location, item)| {
                 let mut copy = self.clone();
                 item.effects.apply(&mut copy);
@@ -75,8 +76,11 @@ impl Manager {
             .map(|(k, _)| &**k)
     }
 
-    fn item_at(&self, location: &str) -> Option<&Item> {
-        self.items.get(location)
+    fn items_at(&self, location: &str) -> &[Item] {
+        self.items
+            .get(location)
+            .map(|v| v.as_slice())
+            .unwrap_or(&[])
     }
 }
 
