@@ -150,7 +150,7 @@ dependencies = [
 
 [[package]]
 name = "hollow_rando_im_stuck"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "clap",
  "itertools",

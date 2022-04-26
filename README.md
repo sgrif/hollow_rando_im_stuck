@@ -27,6 +27,8 @@ Grubfather will unlock 13 locations". You can get the name of the item to pick
 up by passing `--show-items`, and get the names of the locations each item
 unlocks by passing `--show-unlocked-locations`.
 
+Run `hollow_rando_im_stuck --help` for more info
+
 Development Status
 ---
 
