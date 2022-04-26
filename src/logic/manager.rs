@@ -72,7 +72,9 @@ impl Manager {
     fn reachable_locations(&self) -> impl Iterator<Item = &str> {
         self.locations
             .iter()
-            .filter(move |(k, v)| self.acquired_amount(*k) == 0 && v.is_met(self))
+            .filter(move |(location, condition)| {
+                !self.already_unlocked(location) && condition.is_met(self)
+            })
             .map(|(k, _)| &**k)
     }
 
@@ -81,6 +83,10 @@ impl Manager {
             .get(location)
             .map(|v| v.as_slice())
             .unwrap_or(&[])
+    }
+
+    fn already_unlocked(&self, item: &str) -> bool {
+        self.acquired_amount(item) == 0
     }
 }
 
