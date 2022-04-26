@@ -130,7 +130,7 @@ fn parsing_single_ident() {
     );
     assert_eq!(
         parse("$StartLocation[West Waterways]"),
-        RawLogic::ident("Room_shop[West Waterways]"),
+        RawLogic::ident("$StartLocation[West Waterways]"),
     );
 }
 
