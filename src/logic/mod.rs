@@ -1,4 +1,5 @@
-use raw::{ComparisonOp, RawLogic};
+use raw::{Comparator, ComparisonOp, RawLogic};
+use serde::{de, Deserialize, Deserializer};
 use std::error::Error;
 use std::str::FromStr;
 
@@ -29,6 +30,10 @@ impl Condition {
             )),
             Comparison(left, op, right) => {
                 if let (Ident(left), Num(right)) = (*left, *right) {
+                    let right = match right {
+                        Comparator::Int(n) => n,
+                        Comparator::NotchCost { .. } => 0, // FIXME: Canonicalize this here?
+                    };
                     match op {
                         Less => Ok(Self::LessThan(left, right)),
                         LessOrEqual => Ok(Self::LessThan(left, right + 1)),
@@ -57,6 +62,16 @@ impl FromStr for Condition {
     }
 }
 
+impl<'de> Deserialize<'de> for Condition {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?;
+        FromStr::from_str(&s).map_err(de::Error::custom)
+    }
+}
+
 #[test]
 fn ident_becomes_gt_0() {
     assert_eq!(
@@ -71,7 +86,7 @@ fn comparison_conversion() {
         convert(RawLogic::comparison(
             RawLogic::ident("a"),
             ComparisonOp::Less,
-            RawLogic::Num(1)
+            RawLogic::num(1)
         )),
         Condition::LessThan("a".into(), 1),
     );
@@ -79,7 +94,7 @@ fn comparison_conversion() {
         convert(RawLogic::comparison(
             RawLogic::ident("b"),
             ComparisonOp::LessOrEqual,
-            RawLogic::Num(2)
+            RawLogic::num(2)
         )),
         Condition::LessThan("b".into(), 3),
     );
@@ -87,7 +102,7 @@ fn comparison_conversion() {
         convert(RawLogic::comparison(
             RawLogic::ident("c"),
             ComparisonOp::Equal,
-            RawLogic::Num(2)
+            RawLogic::num(2)
         )),
         Condition::And(
             Box::new(Condition::LessThan("c".into(), 3)),
@@ -98,7 +113,7 @@ fn comparison_conversion() {
         convert(RawLogic::comparison(
             RawLogic::ident("d"),
             ComparisonOp::Equal,
-            RawLogic::Num(0)
+            RawLogic::num(0)
         )),
         Condition::LessThan("d".into(), 1),
     );

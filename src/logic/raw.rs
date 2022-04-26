@@ -6,7 +6,7 @@ use std::str::FromStr;
 #[grammar = "logic/grammar.pest"]
 pub(super) enum RawLogic {
     Ident(String),
-    Num(u8),
+    Num(Comparator),
     And(Box<RawLogic>, Box<RawLogic>),
     Or(Box<RawLogic>, Box<RawLogic>),
     Comparison(Box<RawLogic>, ComparisonOp, Box<RawLogic>),
@@ -27,6 +27,10 @@ impl RawLogic {
 
     pub(super) fn comparison(left: Self, op: ComparisonOp, right: Self) -> Self {
         RawLogic::Comparison(Box::new(left), op, Box::new(right))
+    }
+
+    pub(super) fn num(n: impl Into<Comparator>) -> Self {
+        RawLogic::Num(n.into())
     }
 }
 
@@ -49,9 +53,16 @@ impl FromStr for RawLogic {
 
             let parse_primary = |pair: Pair<Rule>| match pair.as_rule() {
                 Rule::ident | Rule::transition => Ok(RawLogic::ident(pair.as_str())),
-                Rule::num => {
+                Rule::int => {
                     let num = u8::from_str(pair.as_str())?;
-                    Ok(RawLogic::Num(num))
+                    Ok(RawLogic::num(num))
+                }
+                Rule::notch_cost => {
+                    let ints = pair
+                        .into_inner()
+                        .map(|i| u8::from_str(i.as_str()))
+                        .collect::<Result<Vec<_>, _>>()?;
+                    Ok(RawLogic::num(Comparator::NotchCost { charm_ids: ints }))
                 }
                 Rule::paren_expression => parse(pair.into_inner()),
                 _ => Err("expected ident or number".into()),
@@ -98,12 +109,28 @@ impl FromStr for ComparisonOp {
     }
 }
 
+#[derive(PartialEq, Eq, Debug, Clone)]
+pub(super) enum Comparator {
+    Int(u8),
+    NotchCost { charm_ids: Vec<u8> },
+}
+
+impl From<u8> for Comparator {
+    fn from(n: u8) -> Self {
+        Self::Int(n)
+    }
+}
+
 #[test]
 fn parsing_single_ident() {
     assert_eq!(parse("ANY"), RawLogic::ident("ANY"),);
     assert_eq!(
         parse("Room_shop[left1]"),
         RawLogic::ident("Room_shop[left1]"),
+    );
+    assert_eq!(
+        parse("$StartLocation[West Waterways]"),
+        RawLogic::ident("Room_shop[West Waterways]"),
     );
 }
 
@@ -174,7 +201,7 @@ fn comparison() {
         RawLogic::comparison(
             RawLogic::ident("a"),
             ComparisonOp::Greater,
-            RawLogic::Num(1)
+            RawLogic::num(1)
         ),
     );
     assert_eq!(
@@ -184,7 +211,7 @@ fn comparison() {
             RawLogic::comparison(
                 RawLogic::ident("b"),
                 ComparisonOp::LessOrEqual,
-                RawLogic::Num(2),
+                RawLogic::num(2),
             ),
         ),
     );
@@ -193,7 +220,21 @@ fn comparison() {
         RawLogic::comparison(
             RawLogic::ident("foo's"),
             ComparisonOp::Less,
-            RawLogic::Num(4)
+            RawLogic::num(4)
+        ),
+    );
+}
+
+#[test]
+fn notch_cost_comparsion() {
+    assert_eq!(
+        parse("NOTCHES>$NotchCost[31,37]"),
+        RawLogic::comparison(
+            RawLogic::ident("NOTCHES"),
+            ComparisonOp::Greater,
+            RawLogic::num(Comparator::NotchCost {
+                charm_ids: vec![31, 37]
+            }),
         ),
     );
 }

@@ -1,6 +1,12 @@
-ident = @{ XID_START ~ (XID_CONTINUE | "'")* }
-transition = @{ ident ~ ("[" ~ ident ~ "]")? }
-num = @{ ASCII_DIGIT+ }
+id_start = _{ XID_START | "$" }
+id_continue = _{ XID_CONTINUE | "'" | "-" }
+ident = @{ id_start ~ id_continue* }
+room_name = @{ id_start ~ (id_continue | " ")* }
+transition = @{ ident ~ ("[" ~ room_name ~ "]")? }
+
+int = @{ ASCII_DIGIT+ }
+notch_cost = { "$NotchCost[" ~ int ~ ("," ~ int)* ~ "]" }
+num = _{ int | notch_cost }
 
 logic_operator = _{ and | or }
   and = { "+" }
