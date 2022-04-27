@@ -1,16 +1,16 @@
 [package]
 name = "hollow_rando_im_stuck"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["Sage Griffin <sage@sagetheprogrammer.com>"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+clap = { version = "3.1.12", features = ["derive"] }
+itertools = "0.10.0"
+lazy_static = "1.4.0"
 pest = "2.1.3"
 pest_derive = "2.1.0"
-lazy_static = "1.4.0"
-serde_jsonrc = "0.1.0"
 serde = { version = "1.0.0", features = ["derive"] }
-itertools = "0.10.0"
-clap = { version = "3.1.12", features = ["derive"] }
+serde_jsonrc = "0.1.0"
