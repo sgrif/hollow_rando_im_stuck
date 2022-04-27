@@ -6,6 +6,8 @@ pub(crate) struct RawSpoiler {
     pub logic_manager: RawLogicManager,
     #[serde(rename = "itemPlacements")]
     pub items: Vec<ItemPlacement>,
+    #[serde(rename = "InitialProgression")]
+    pub initial_progression: InitialProgression,
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]
@@ -14,7 +16,7 @@ pub struct RawLogicManager {
     pub logic: Vec<Logic>,
 }
 
-#[derive(Debug, Clone, serde::Deserialize)]
+#[derive(PartialEq, Eq, Hash, Debug, Clone, serde::Deserialize)]
 pub struct Logic {
     #[serde(alias = "Name")]
     pub name: String,
@@ -36,7 +38,7 @@ pub struct ItemContainer {
     pub inner: Item,
 }
 
-#[derive(Debug, Clone, serde::Deserialize)]
+#[derive(PartialEq, Eq, Hash, Debug, Clone, serde::Deserialize)]
 pub struct Item {
     #[serde(rename = "Name")]
     pub name: String,
@@ -48,6 +50,7 @@ pub struct Item {
 pub struct Location {
     #[serde(rename = "LocationDef")]
     pub def: LocationDef,
+    pub costs: Option<Vec<Cost>>,
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]
@@ -56,7 +59,7 @@ pub struct LocationDef {
     pub name: String,
 }
 
-#[derive(Debug, Clone, serde::Deserialize)]
+#[derive(PartialEq, Eq, Hash, Debug, Clone, serde::Deserialize)]
 #[serde(untagged)]
 pub enum Effects {
     #[serde(rename_all = "PascalCase")]
@@ -102,15 +105,37 @@ impl Effects {
     }
 }
 
-#[derive(Debug, Clone, serde::Deserialize)]
+#[derive(PartialEq, Eq, Hash, Debug, Clone, serde::Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct Effect {
-    term: String,
-    value: i32,
+    pub term: String,
+    pub value: i32,
 }
 
 impl Effect {
     fn apply(&self, lm: &mut logic::Manager) {
         lm.acquire(&self.term, self.value)
     }
+}
+
+#[derive(PartialEq, Eq, Hash, Debug, Clone, serde::Deserialize)]
+#[serde(untagged)]
+pub enum Cost {
+    Term { term: String, threshold: i32 },
+    Geo {},
+}
+
+impl Cost {
+    pub(crate) fn is_met(&self, lm: &logic::Manager) -> bool {
+        match self {
+            Self::Term { term, threshold } => lm.acquired_amount(&term) >= *threshold,
+            Self::Geo {} => true, // FIXME: Check replenish geo waypoint?
+        }
+    }
+}
+
+#[derive(Debug, Clone, serde::Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct InitialProgression {
+    pub setters: Vec<Effect>,
 }

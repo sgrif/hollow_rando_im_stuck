@@ -8,7 +8,7 @@ pub use manager::Manager;
 mod manager;
 mod raw;
 
-#[derive(PartialEq, Eq, Debug, Clone)]
+#[derive(PartialEq, Eq, Hash, Debug, Clone)]
 pub enum Condition {
     And(Box<Condition>, Box<Condition>),
     Or(Box<Condition>, Box<Condition>),

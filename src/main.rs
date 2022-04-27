@@ -1,4 +1,5 @@
 use clap::Parser;
+use itertools::*;
 use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
@@ -55,8 +56,27 @@ fn try_main() -> Result<(), Box<dyn Error>> {
             for location in key_item.unlocked_locations {
                 println!("- {}", location);
             }
+            let items_by_location = key_item
+                .unlocked_items
+                .into_iter()
+                .map(|item| (item.location, item.name))
+                .into_group_map();
+            for (location, items) in items_by_location {
+                println!("- {} items at {}", items.len(), location);
+            }
         } else {
-            println!(" {} locations", key_item.unlocked_locations.len());
+            if key_item.unlocked_locations.len() > 0 {
+                print!(" {} locations", key_item.unlocked_locations.len());
+                if key_item.unlocked_items.len() > 0 {
+                    print!(" and");
+                } else {
+                    println!();
+                }
+            }
+
+            if key_item.unlocked_items.len() > 0 {
+                println!(" {} items in shops", key_item.unlocked_items.len());
+            }
         }
     }
 
