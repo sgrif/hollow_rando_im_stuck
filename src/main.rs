@@ -1,5 +1,4 @@
 use clap::Parser;
-use itertools::*;
 use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
@@ -39,10 +38,8 @@ fn try_main() -> Result<(), Box<dyn Error>> {
     let key_items = logic_manager.reachable_key_items();
     if key_items.is_empty() {
         println!("Oh no, we couldn't find any single pickup that unlocks new locations. \
-            This could mean that you need to pick up more than one item to unlock anything. \
-            This is more likely if there are any grubs, charms, or essence pickups available. \
-            Otherwise, this most likely means your save has an edge case we haven't handeld yet. \
-            If you think that's the case, sgrif#3891 in Discord would appreciate a ping");
+            This most likely means your save has an edge case we haven't handled yet. \
+            sgrif#3891 in Discord would appreciate a ping.");
     }
 
     for key_item in key_items {
@@ -58,27 +55,8 @@ fn try_main() -> Result<(), Box<dyn Error>> {
             for location in key_item.unlocked_locations {
                 println!("- {}", location);
             }
-            let items_by_location = key_item
-                .unlocked_items
-                .into_iter()
-                .map(|item| (item.location, item.name))
-                .into_group_map();
-            for (location, items) in items_by_location {
-                println!("- {} items at {}", items.len(), location);
-            }
         } else {
-            if key_item.unlocked_locations.len() > 0 {
-                print!(" {} locations", key_item.unlocked_locations.len());
-                if key_item.unlocked_items.len() > 0 {
-                    print!(" and");
-                } else {
-                    println!();
-                }
-            }
-
-            if key_item.unlocked_items.len() > 0 {
-                println!(" {} items in shops", key_item.unlocked_items.len());
-            }
+            print!(" {} locations", key_item.unlocked_locations.len());
         }
     }
 
