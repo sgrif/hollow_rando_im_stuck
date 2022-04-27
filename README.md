@@ -8,7 +8,14 @@ to know if it's worth the time? This tool can help.
 Give it a path to your save files, and it will tell you what items you can reach
 which will unlock new items/locations.
 
-Usage
+Use it from the browser
+---
+
+Visit https://sgrif.github.io/hollow\_rando\_im\_stuck/, click "Select
+Files", select `RawSpoilerLog.json` and
+`TrackerDataWithoutSequenceBreaksPM.txt`, and then click "Run"
+
+Use it from the command line
 ---
 
 `hollow_rando_im_stuck path/to/save`
@@ -33,9 +40,7 @@ Development Status
 ---
 
 This is a very early proof of concept, and likely has many edge cases that I are
-not yet handled. See the list of known issues below. Additionally, the current
-UI is a very crude CLI that has been used for prototyping. The goal is to
-eventually provide a web frontend and/or GUI application.
+not yet handled. See the list of known issues below.
 
 This has not yet been tested with mods that add new items/checks or modify the
 logic, but I have no reason to believe that it will struggle with those.
