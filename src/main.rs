@@ -38,9 +38,11 @@ fn try_main() -> Result<(), Box<dyn Error>> {
 
     let key_items = logic_manager.reachable_key_items();
     if key_items.is_empty() {
-        println!("Oh no, we couldn't find any single pickup that unlocks new locations.");
-        println!("This most likely means your save has an edge case we haven't handeld yet.");
-        println!("sgrif#3891 in Discord would appreciate a ping");
+        println!("Oh no, we couldn't find any single pickup that unlocks new locations. \
+            This could mean that you need to pick up more than one item to unlock anything. \
+            This is more likely if there are any grubs, charms, or essence pickups available. \
+            Otherwise, this most likely means your save has an edge case we haven't handeld yet. \
+            If you think that's the case, sgrif#3891 in Discord would appreciate a ping");
     }
 
     for key_item in key_items {
