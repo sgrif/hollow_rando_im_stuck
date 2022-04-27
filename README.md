@@ -43,11 +43,9 @@ logic, but I have no reason to believe that it will struggle with those.
 Known Issues
 ---
 
-- The tool knows nothing about costs. It will assume you can afford everything
-  from Grubfather/Jiji/Salubra.
-- The tool will only provide an answer if a single pickup would unlock a new
-  location. It will fail if a new location is only unlocked by picking up two
-  separate items.
+- The tool will only provide an answer if a single pickup or category of pickups
+  (e.g. grubs, essence) would unlock a new location or item in a shop. It will
+  fail if a new location is only unlocked by picking up two separate items.
 - Notch costs are ignored. It is assumed you always have enough notches to wear
   any charms needed.
 

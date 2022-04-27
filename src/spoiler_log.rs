@@ -6,8 +6,6 @@ pub(crate) struct RawSpoiler {
     pub logic_manager: RawLogicManager,
     #[serde(rename = "itemPlacements")]
     pub items: Vec<ItemPlacement>,
-    #[serde(rename = "InitialProgression")]
-    pub initial_progression: InitialProgression,
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]
@@ -82,11 +80,23 @@ pub enum Effects {
 
 impl Effects {
     pub(crate) fn apply(&self, lm: &mut logic::Manager) {
+        self.for_each_effect(lm, |effect, lm| effect.apply(lm))
+    }
+
+    pub(crate) fn apply_only(&self, term: &str, lm: &mut logic::Manager) {
+        self.for_each_effect(lm, |effect, lm| {
+            if effect.term == term {
+                effect.apply(lm)
+            }
+        })
+    }
+
+    fn for_each_effect(&self, lm: &mut logic::Manager, f: impl Fn(&Effect, &mut logic::Manager)) {
         match self {
-            Self::Single { effect } => effect.apply(lm),
+            Self::Single { effect } => f(effect, lm),
             Self::Multiple { effects } => {
                 for effect in effects {
-                    effect.apply(lm)
+                    f(effect, lm)
                 }
             }
             Self::MultiItem {
@@ -95,9 +105,9 @@ impl Effects {
                 false_item,
             } => {
                 if logic.logic.is_met(lm) {
-                    true_item.effects.apply(lm)
+                    true_item.effects.for_each_effect(lm, f)
                 } else {
-                    false_item.effects.apply(lm)
+                    false_item.effects.for_each_effect(lm, f)
                 }
             }
             Self::None {} => {} // do nothing
@@ -132,10 +142,11 @@ impl Cost {
             Self::Geo {} => true, // FIXME: Check replenish geo waypoint?
         }
     }
-}
 
-#[derive(Debug, Clone, serde::Deserialize)]
-#[serde(rename_all = "PascalCase")]
-pub struct InitialProgression {
-    pub setters: Vec<Effect>,
+    pub(crate) fn term(&self) -> Option<&str> {
+        match self {
+            Self::Term { term, .. } => Some(term),
+            Self::Geo {} => None,
+        }
+    }
 }

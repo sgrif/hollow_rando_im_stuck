@@ -36,10 +36,13 @@ fn try_main() -> Result<(), Box<dyn Error>> {
         logic::Manager::new(deserialize(&spoiler_path)?, deserialize(&tracker_path)?);
 
     let key_items = logic_manager.reachable_key_items();
-    if key_items.is_empty() {
-        println!("Oh no, we couldn't find any single pickup that unlocks new locations. \
+    let cost_unlocks = logic_manager.reachable_cost_unlocks();
+    if key_items.is_empty() && cost_unlocks.is_empty() {
+        println!(
+            "Oh no, we couldn't find any single pickup that unlocks new locations. \
             This most likely means your save has an edge case we haven't handled yet. \
-            sgrif#3891 in Discord would appreciate a ping.");
+            sgrif#3891 in Discord would appreciate a ping."
+        );
     }
 
     for key_item in key_items {
@@ -57,6 +60,19 @@ fn try_main() -> Result<(), Box<dyn Error>> {
             }
         } else {
             print!(" {} locations", key_item.unlocked_locations.len());
+        }
+    }
+
+    for cost_unlock in cost_unlocks {
+        print!(
+            "Getting all reachable {} will unlock {} items at ",
+            cost_unlock.term.to_lowercase(),
+            cost_unlock.count
+        );
+        if cli.show_unlocked_locations {
+            println!("{}", cost_unlock.location);
+        } else {
+            println!("a shop");
         }
     }
 

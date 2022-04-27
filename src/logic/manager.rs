@@ -15,7 +15,7 @@ pub struct Manager {
 }
 
 impl Manager {
-    pub(crate) fn new(spoiler: RawSpoiler, mut acquired: HashMap<String, i32>) -> Self {
+    pub(crate) fn new(spoiler: RawSpoiler, acquired: HashMap<String, i32>) -> Self {
         let locations = spoiler
             .logic_manager
             .logic
@@ -35,19 +35,6 @@ impl Manager {
                 (key, value)
             })
             .into_group_map();
-
-        // Randomized costs have their inital value set to 0 - tolerance setting. We need to adjust
-        // for that to get the real number of acquired items.
-        let negative_initial_costs = spoiler
-            .initial_progression
-            .setters
-            .iter()
-            .filter(|effect| effect.value.is_negative());
-        for cost in negative_initial_costs {
-            if let Some(value) = acquired.get_mut(&cost.term) {
-                *value -= cost.value;
-            }
-        }
         Self {
             locations: Rc::new(locations),
             items: Rc::new(items),
@@ -74,6 +61,36 @@ impl Manager {
                             .collect(),
                     })
                 }
+            })
+            .collect()
+    }
+
+    pub(crate) fn reachable_cost_unlocks(&self) -> Vec<CostUnlock> {
+        let affordable_items = self.affordable_items().collect::<HashSet<_>>();
+        let cost_terms = self
+            .reachable_items()
+            .flat_map(|(_, item)| &item.costs)
+            .filter_map(|cost| cost.term())
+            .collect::<HashSet<_>>();
+
+        cost_terms
+            .into_iter()
+            .flat_map(|term| {
+                let mut copy = self.clone();
+                copy.acquired.remove(term);
+                for (_, item) in &affordable_items {
+                    item.effects.apply_only(term, &mut copy);
+                }
+                copy.affordable_items()
+                    .filter(|item| !affordable_items.contains(item))
+                    .into_group_map()
+                    .into_iter()
+                    .map(|(location, unlocks)| CostUnlock {
+                        term: term.to_string(),
+                        location: location.to_string(),
+                        count: unlocks.len(),
+                    })
+                    .collect_vec()
             })
             .collect()
     }
@@ -132,6 +149,13 @@ pub struct KeyItem {
     pub(crate) unlocked_locations: Vec<String>,
 }
 
+#[derive(PartialEq, Eq, Debug)]
+pub struct CostUnlock {
+    pub(crate) term: String,
+    pub(crate) location: String,
+    pub(crate) count: usize,
+}
+
 #[test]
 fn unaffordable_costs() {
     let mut locations = HashMap::new();
@@ -143,22 +167,41 @@ fn unaffordable_costs() {
         "Important place".into(),
         Condition::GreaterThan("New place".into(), 0),
     );
+    locations.insert(
+        "More important place".into(),
+        Condition::GreaterThan("Newer place".into(), 0),
+    );
     let mut items = HashMap::new();
     items.insert(
         "Grubfather".into(),
-        vec![Item {
-            name: "Very Important".into(),
-            effects: Effects::Single {
-                effect: Effect {
-                    term: "New place".into(),
-                    value: 1,
+        vec![
+            Item {
+                name: "Very Important".into(),
+                effects: Effects::Single {
+                    effect: Effect {
+                        term: "New place".into(),
+                        value: 1,
+                    },
                 },
+                costs: vec![Cost::Term {
+                    term: "GRUBS".into(),
+                    threshold: 1,
+                }],
             },
-            costs: vec![Cost::Term {
-                term: "GRUBS".into(),
-                threshold: 1,
-            }],
-        }],
+            Item {
+                name: "So Important".into(),
+                effects: Effects::Single {
+                    effect: Effect {
+                        term: "Newer place".into(),
+                        value: 1,
+                    },
+                },
+                costs: vec![Cost::Term {
+                    term: "GRUBS".into(),
+                    threshold: 2,
+                }],
+            },
+        ],
     );
     let mut acquired = HashMap::new();
     acquired.insert("Crossroads_38[right1]".into(), 1);
@@ -187,12 +230,19 @@ fn unaffordable_costs() {
             costs: Vec::new(),
         });
 
-    // assert_eq!(
-    //     vec!["A Grub".to_string()],
-    //     manager
-    //         .reachable_key_items()
-    //         .into_iter()
-    //         .map(|item| item.item)
-    //         .collect_vec()
-    // );
+    assert_eq!(
+        vec![CostUnlock {
+            term: "GRUBS".into(),
+            location: "Grubfather".into(),
+            count: 1,
+        }],
+        manager.reachable_cost_unlocks(),
+    );
+
+    // 1 grub collected, 1 reachable grub
+    manager.acquired.insert("GRUBS".into(), 1);
+
+    assert_eq!(2, manager.affordable_items().count());
+    assert_eq!(1, manager.reachable_key_items().len());
+    assert_eq!(0, manager.reachable_cost_unlocks().len());
 }
