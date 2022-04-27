@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hollow Knight Randomizer "I'm Stuck" Helper</title>
+  </head>
+  <body>
+    <p>
+      Click the button below to upload your `RawSpoiler.json` and `TrackerDataWithoutSequenceBreaksPM.txt` files.
+    </p>
+    <p>
+      On Windows, these are located in "%USERPROFILE%\AppData\LocalLow\Team Cherry\Hollow Knight\Randomizer 4\user1". For a save slot other than the first, replace user1 with user2, user3, etc.
+    </p>
+
+    <p>
+      <input type="checkbox" name="show_items" id="show_items" />
+      <label for="show_items">Show Items</label>
+    </p>
+
+    <p>
+      <input type="checkbox" name="show_unlocked_locations" id="show_unlocked_locations" />
+      <label for="show_unlocked_locations">Show Locations Unlocked By Pickups</label>
+    </p>
+    <p>
+      <button id="select_files">Select Files</button>
+      <button id="run" disabled>Run</button>
+    </p>
+
+    <pre id="output"></pre>
+
+    <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
+    <script src="./bootstrap.js"></script>
+  </body>
+</html>
