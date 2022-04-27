@@ -11,7 +11,7 @@ which will unlock new items/locations.
 Use it from the browser
 ---
 
-Visit https://sgrif.github.io/hollow\_rando\_im\_stuck/, click "Select
+Visit https://sgrif.github.io/hollow_rando_im_stuck/, click "Select
 Files", select `RawSpoilerLog.json` and
 `TrackerDataWithoutSequenceBreaksPM.txt`, and then click "Run"
 
