@@ -22,8 +22,8 @@ Use it from the command line
 
 On Windows with the default save locations, this would look like
 
-`hollow_rando_im_stuck.exe "%USERPROFILE%\AppData\LocalLow\Team Cherry\Hollow Knight\Randomizer 4\user1"`
-(replace user1 with user2-4 for other save slots)
+`hollow_rando_im_stuck.exe "%USERPROFILE%\AppData\LocalLow\Team Cherry\Hollow Knight\Randomizer 4\Recent"`
+(replace Recent with user1-4 for specific save slots)
 
 The path must be a directory containing `RawSpoilerLog.json` and
 `TrackerDataWithoutSequenceBreaksPM.txt`

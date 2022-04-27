@@ -9,7 +9,7 @@ use std::process::exit;
 #[derive(Parser)]
 struct Cli {
     /// The path to the directory containing your Randomizer spoiler logs. For example,
-    /// "%USERPROFILE%\AppData\LocalLow\Team Cherry\Hollow Knight\Randomizer 4\user1"
+    /// "%USERPROFILE%\AppData\LocalLow\Team Cherry\Hollow Knight\Randomizer 4\Recent"
     path: PathBuf,
     /// When enabled, lists the locations unlocked by each item, rather than only showing a count
     #[clap(long)]
