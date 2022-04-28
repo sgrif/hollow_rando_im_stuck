@@ -48,6 +48,9 @@ logic, but I have no reason to believe that it will struggle with those.
 Known Issues
 ---
 
+- The tool may tell you to pick up items you have already collected if an
+  upgraded version of the item exists and would unlock new areas for you (e.g.
+  cloak)
 - The tool will only provide an answer if a single pickup or category of pickups
   (e.g. grubs, essence) would unlock a new location or item in a shop. It will
   fail if a new location is only unlocked by picking up two separate items.
