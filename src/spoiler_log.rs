@@ -6,6 +6,8 @@ pub(crate) struct RawSpoiler {
     pub logic_manager: RawLogicManager,
     #[serde(rename = "itemPlacements")]
     pub items: Vec<ItemPlacement>,
+    #[serde(rename = "transitionPlacements")]
+    pub transitions: Option<Vec<TransitionPlacement>>,
     #[serde(rename = "StartDef")]
     pub start_def: StartDef,
 }
@@ -57,6 +59,13 @@ pub struct Location {
 pub struct LocationDef {
     #[serde(rename = "Name")]
     pub name: String,
+}
+
+#[derive(Debug, Clone, serde::Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct TransitionPlacement {
+    pub target: LocationDef,
+    pub source: LocationDef,
 }
 
 #[derive(PartialEq, Eq, Hash, Debug, Clone, serde::Deserialize)]

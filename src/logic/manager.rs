@@ -11,6 +11,7 @@ use crate::spoiler_log::Effect;
 pub struct Manager {
     locations: Rc<HashMap<String, Condition>>,
     items: Rc<HashMap<String, Vec<Item>>>,
+    transitions: Rc<HashMap<String, String>>,
     cleared: HashSet<String>,
     acquired: HashMap<String, i32>,
 }
@@ -36,12 +37,20 @@ impl Manager {
                 (key, value)
             })
             .into_group_map();
+        let transitions = spoiler
+            .transitions
+            .unwrap_or_default()
+            .into_iter()
+            .map(|placement| (placement.source.name, placement.target.name))
+            .collect();
+
         let mut acquired = HashMap::new();
         acquired.insert("TRUE".into(), 1);
 
         let mut result = Self {
             locations: Rc::new(locations),
             items: Rc::new(items),
+            transitions: Rc::new(transitions),
             cleared,
             acquired,
         };
@@ -161,7 +170,9 @@ impl Manager {
     }
 
     fn unlock_location(&mut self, location: String) {
-        if let Some(connected) = super::vanilla_transitions::TRANSITIONS.get(&location) {
+        if let Some(connected) = self.transitions.get(&location).cloned() {
+            self.acquire(connected, 1);
+        } else if let Some(connected) = super::vanilla_transitions::TRANSITIONS.get(&location) {
             self.acquire(connected.to_string(), 1);
         }
         self.acquire(location, 1);
