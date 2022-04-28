@@ -273,6 +273,7 @@ fn unaffordable_costs() {
         "Grubfather".into(),
         vec![
             Item {
+                id: 0,
                 name: "Very Important".into(),
                 effects: Effects::Single {
                     effect: Effect {
@@ -286,6 +287,7 @@ fn unaffordable_costs() {
                 }],
             },
             Item {
+                id: 1,
                 name: "So Important".into(),
                 effects: Effects::Single {
                     effect: Effect {
@@ -305,6 +307,8 @@ fn unaffordable_costs() {
     let mut manager = Manager {
         locations: Rc::new(locations),
         items: Rc::new(items),
+        transitions: Default::default(),
+        picked_up: Default::default(),
         acquired,
     };
 
@@ -317,6 +321,7 @@ fn unaffordable_costs() {
         .get_mut("Grubfather")
         .unwrap()
         .push(Item {
+            id: 2,
             name: "A Grub".into(),
             effects: Effects::Single {
                 effect: Effect {
