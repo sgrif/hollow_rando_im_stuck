@@ -26,7 +26,7 @@ On Windows with the default save locations, this would look like
 (replace Recent with user1-4 for specific save slots)
 
 The path must be a directory containing `RawSpoilerLog.json` and
-`TrackerDataWithoutSequenceBreaksPM.txt`
+`TrackerLog.txt`
 
 By default, the tool will tell you the locations you should check, and how many
 new locations will be unlocked by checking it. For example, "Getting the item at
@@ -48,9 +48,8 @@ logic, but I have no reason to believe that it will struggle with those.
 Known Issues
 ---
 
-- The tool may tell you to pick up items you have already collected if an
-  upgraded version of the item exists and would unlock new areas for you (e.g.
-  cloak)
+- Any changes to transition placements are currently ignored. The tool assumes
+  a vanilla map layout
 - The tool will only provide an answer if a single pickup or category of pickups
   (e.g. grubs, essence) would unlock a new location or item in a shop. It will
   fail if a new location is only unlocked by picking up two separate items.

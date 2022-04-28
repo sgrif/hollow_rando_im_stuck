@@ -29,10 +29,10 @@ fn main() {
 fn try_main() -> Result<(), Box<dyn Error>> {
     let cli = Cli::parse();
     let spoiler_path = cli.path.join("RawSpoiler.json");
-    let tracker_path = cli.path.join("TrackerDataWithoutSequenceBreaksPM.txt");
+    let tracker_path = cli.path.join("TrackerLog.txt");
     let settings = Settings {
         raw_spoiler: File::open(spoiler_path)?,
-        tracker_data: File::open(tracker_path)?,
+        tracker_log: File::open(tracker_path)?,
         show_unlocked_locations: cli.show_unlocked_locations,
         show_items: cli.show_items,
     };

@@ -1,3 +1,4 @@
+use std::collections::HashSet;
 use std::error::Error;
 use std::io::prelude::*;
 use std::io::BufReader;
@@ -8,8 +9,8 @@ pub(crate) mod spoiler_log;
 pub struct Settings<T: Read> {
     /// A handle to read `RawSpoiler.json`
     pub raw_spoiler: T,
-    /// A handle to read `TrackerDataWithoutSequenceBreaksPM.txt`
-    pub tracker_data: T,
+    /// A handle to read `TrackerLog.txt`
+    pub tracker_log: T,
     /// When enabled, lists the locations unlocked by each item, rather than only showing a count
     pub show_unlocked_locations: bool,
     /// When enabled, shows the name of the item at each location.
@@ -18,8 +19,8 @@ pub struct Settings<T: Read> {
 
 pub fn run(output: &mut impl Write, settings: Settings<impl Read>) -> Result<(), Box<dyn Error>> {
     let logic_manager = logic::Manager::new(
-        deserialize(settings.raw_spoiler)?,
-        deserialize(settings.tracker_data)?,
+        serde_json::from_reader(BufReader::new(settings.raw_spoiler))?,
+        read_unlocked_locations(settings.tracker_log)?,
     );
 
     let key_items = logic_manager.reachable_key_items();
@@ -68,7 +69,19 @@ pub fn run(output: &mut impl Write, settings: Settings<impl Read>) -> Result<(),
     Ok(())
 }
 
-fn deserialize<T: serde::de::DeserializeOwned>(reader: impl Read) -> Result<T, Box<dyn Error>> {
-    let mut file = BufReader::new(reader);
-    Ok(serde_jsonrc::from_reader(&mut file)?)
+fn read_unlocked_locations(reader: impl Read) -> Result<HashSet<String>, Box<dyn Error>> {
+    const HEADER: &str = "LOCATION CLEARED --- {";
+    let reader = BufReader::new(reader);
+    reader
+        .lines()
+        .filter(|line| {
+            line.as_ref()
+                .map(|l| l.starts_with(HEADER))
+                .unwrap_or(false)
+        })
+        .map(|line| {
+            let line = line?;
+            Ok(line[HEADER.len()..line.len() - 1].to_string())
+        })
+        .collect()
 }

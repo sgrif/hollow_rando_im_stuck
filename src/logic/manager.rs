@@ -11,11 +11,12 @@ use crate::spoiler_log::Effect;
 pub struct Manager {
     locations: Rc<HashMap<String, Condition>>,
     items: Rc<HashMap<String, Vec<Item>>>,
+    cleared: HashSet<String>,
     acquired: HashMap<String, i32>,
 }
 
 impl Manager {
-    pub(crate) fn new(spoiler: RawSpoiler, acquired: HashMap<String, i32>) -> Self {
+    pub(crate) fn new(spoiler: RawSpoiler, cleared: HashSet<String>) -> Self {
         let locations = spoiler
             .logic_manager
             .logic
@@ -35,11 +36,21 @@ impl Manager {
                 (key, value)
             })
             .into_group_map();
-        Self {
+        let mut acquired = HashMap::new();
+        acquired.insert("TRUE".into(), 1);
+
+        let mut result = Self {
             locations: Rc::new(locations),
             items: Rc::new(items),
+            cleared,
             acquired,
-        }
+        };
+
+        result.unlock_location(spoiler.start_def.transition);
+        result.collect_items_at_cleared_locations();
+        result.unlock_all_reachable_locations();
+
+        result
     }
 
     pub(crate) fn reachable_key_items(&self) -> Vec<KeyItem> {
@@ -99,8 +110,8 @@ impl Manager {
         self.acquired.get(name).copied().unwrap_or_default()
     }
 
-    pub(crate) fn acquire(&mut self, term: &str, amt: i32) {
-        let entry = self.acquired.entry(term.to_string()).or_default();
+    pub(crate) fn acquire(&mut self, term: String, amt: i32) {
+        let entry = self.acquired.entry(term).or_default();
         *entry += amt;
     }
 
@@ -132,6 +143,36 @@ impl Manager {
 
     fn already_unlocked(&self, item: &str) -> bool {
         self.acquired_amount(item) != 0
+    }
+
+    /// Returns the first reachable location that has no items, meaning it is
+    /// either a waypoint or a transition
+    fn next_reachable_location(&self) -> Option<&str> {
+        self.reachable_locations()
+            .find(|loc| self.items_at(loc).is_empty())
+    }
+
+    /// Marks all reachable transitions or waypoints as acquired
+    fn unlock_all_reachable_locations(&mut self) {
+        while let Some(loc) = self.next_reachable_location() {
+            let loc = loc.into();
+            self.unlock_location(loc);
+        }
+    }
+
+    fn unlock_location(&mut self, location: String) {
+        if let Some(connected) = super::vanilla_transitions::TRANSITIONS.get(&location) {
+            self.acquire(connected.to_string(), 1);
+        }
+        self.acquire(location, 1);
+    }
+
+    fn collect_items_at_cleared_locations(&mut self) {
+        for location in self.cleared.clone() {
+            for item in self.items_at(&location).to_vec() {
+                item.effects.apply(self)
+            }
+        }
     }
 }
 

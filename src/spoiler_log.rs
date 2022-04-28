@@ -6,6 +6,8 @@ pub(crate) struct RawSpoiler {
     pub logic_manager: RawLogicManager,
     #[serde(rename = "itemPlacements")]
     pub items: Vec<ItemPlacement>,
+    #[serde(rename = "StartDef")]
+    pub start_def: StartDef,
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]
@@ -124,7 +126,7 @@ pub struct Effect {
 
 impl Effect {
     fn apply(&self, lm: &mut logic::Manager) {
-        lm.acquire(&self.term, self.value)
+        lm.acquire(self.term.clone(), self.value)
     }
 }
 
@@ -149,4 +151,10 @@ impl Cost {
             Self::Geo {} => None,
         }
     }
+}
+
+#[derive(Debug, Clone, serde::Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct StartDef {
+    pub transition: String,
 }
