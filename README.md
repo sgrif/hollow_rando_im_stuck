@@ -13,7 +13,7 @@ Use it from the browser
 
 Visit https://sgrif.github.io/hollow_rando_im_stuck/, click "Select
 Files", select `RawSpoilerLog.json` and
-`TrackerDataWithoutSequenceBreaksPM.txt`, and then click "Run"
+`TrackerLog.txt`, and then click "Run"
 
 Use it from the command line
 ---
