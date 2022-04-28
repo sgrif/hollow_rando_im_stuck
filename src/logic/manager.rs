@@ -2,6 +2,7 @@ use super::Condition;
 use crate::spoiler_log::{Cost, Effects, RawSpoiler};
 use itertools::Itertools;
 use std::collections::{HashMap, HashSet};
+use std::error::Error;
 use std::rc::Rc;
 
 #[cfg(test)]
@@ -16,7 +17,10 @@ pub struct Manager {
 }
 
 impl Manager {
-    pub(crate) fn new(spoiler: RawSpoiler, collected: Vec<(String, String)>) -> Self {
+    pub(crate) fn new(
+        spoiler: RawSpoiler,
+        collected: Vec<(String, String)>,
+    ) -> Result<Self, Box<dyn Error>> {
         let locations = spoiler
             .logic_manager
             .logic
@@ -57,17 +61,37 @@ impl Manager {
         };
 
         for (item_name, location) in collected {
-            for item in result.items_at(&location).to_vec() {
-                if item.name == item_name {
-                    item.effects.apply(&mut result);
-                }
+            if let Some(item) = result.find_item(Some(&location), |item| item.name == item_name) {
+                item.effects.clone().apply(&mut result);
+            } else if !item_name.starts_with("100_Geo-") {
+                let item = result
+                    .find_item(None, |item| item.name == item_name)
+                    .ok_or_else(|| {
+                        format!(
+                            "Tracker Log indicated {} was picked up, but no item with that name was found",
+                            item_name
+                        )
+                    })?;
+                result
+                    .find_item(Some(&location), |other| {
+                        item.effects.has_same_effect_as(&other.effects)
+                    })
+                    .ok_or_else(|| {
+                        format!(
+                            "Could not find an item at {} with the same effects as {}",
+                            location, item_name
+                        )
+                    })?
+                    .effects
+                    .clone()
+                    .apply(&mut result);
             }
         }
 
         result.unlock_location(spoiler.start_def.transition);
         result.unlock_all_reachable_locations();
 
-        result
+        Ok(result)
     }
 
     pub(crate) fn reachable_key_items(&self) -> Vec<KeyItem> {
@@ -184,6 +208,18 @@ impl Manager {
             self.acquire(connected.to_string(), 1);
         }
         self.acquire(location, 1);
+    }
+
+    fn find_item(
+        &self,
+        location: Option<&str>,
+        pattern: impl FnMut(&&Item) -> bool,
+    ) -> Option<&Item> {
+        if let Some(location) = location {
+            self.items_at(location).iter().find(pattern)
+        } else {
+            self.items.values().flatten().find(pattern)
+        }
     }
 }
 

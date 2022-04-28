@@ -4,6 +4,7 @@ use std::io::BufReader;
 
 pub(crate) mod logic;
 pub(crate) mod spoiler_log;
+mod tracker_log;
 
 pub struct Settings<T: Read> {
     /// A handle to read `RawSpoiler.json`
@@ -19,8 +20,8 @@ pub struct Settings<T: Read> {
 pub fn run(output: &mut impl Write, settings: Settings<impl Read>) -> Result<(), Box<dyn Error>> {
     let logic_manager = logic::Manager::new(
         serde_json::from_reader(BufReader::new(settings.raw_spoiler))?,
-        read_unlocked_locations(settings.tracker_log)?,
-    );
+        tracker_log::read(settings.tracker_log)?,
+    )?;
 
     let key_items = logic_manager.reachable_key_items();
     let cost_unlocks = logic_manager.reachable_cost_unlocks();
@@ -66,26 +67,4 @@ pub fn run(output: &mut impl Write, settings: Settings<impl Read>) -> Result<(),
     }
 
     Ok(())
-}
-
-fn read_unlocked_locations(reader: impl Read) -> Result<Vec<(String, String)>, Box<dyn Error>> {
-    const HEADER: &str = "ITEM OBTAINED --- {";
-    const SEP: &str = "} at {";
-    let reader = BufReader::new(reader);
-    reader
-        .lines()
-        .filter(|line| {
-            line.as_ref()
-                .map(|l| l.starts_with(HEADER))
-                .unwrap_or(false)
-        })
-        .map(|line| {
-            let line = line?;
-            let sep_location = line.find(SEP)
-                .ok_or("invalid ITEM OBTAINED line")?;
-            let item_name = line[HEADER.len()..sep_location].to_string();
-            let location_name = line[sep_location + SEP.len()..line.len() - 1].to_string();
-            Ok((item_name, location_name))
-        })
-        .collect()
 }
