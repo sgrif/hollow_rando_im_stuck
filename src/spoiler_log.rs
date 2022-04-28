@@ -10,6 +10,8 @@ pub(crate) struct RawSpoiler {
     pub transitions: Option<Vec<TransitionPlacement>>,
     #[serde(rename = "StartDef")]
     pub start_def: StartDef,
+    #[serde(rename = "InitialProgression")]
+    pub initial_progression: InitialProgression,
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]
@@ -166,4 +168,10 @@ impl Cost {
 #[serde(rename_all = "PascalCase")]
 pub struct StartDef {
     pub transition: String,
+}
+
+#[derive(Debug, Clone, serde::Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct InitialProgression {
+    pub setters: Vec<Effect>,
 }

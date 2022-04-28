@@ -46,6 +46,9 @@ impl Manager {
 
         let mut acquired = HashMap::new();
         acquired.insert("TRUE".into(), 1);
+        for setter in spoiler.initial_progression.setters {
+            acquired.insert(setter.term, setter.value);
+        }
 
         let mut result = Self {
             locations: Rc::new(locations),
