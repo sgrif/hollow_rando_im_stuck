@@ -169,9 +169,7 @@ impl Manager {
     fn reachable_locations(&self) -> impl Iterator<Item = &str> {
         self.locations
             .iter()
-            .filter(move |(location, condition)| {
-                !self.already_unlocked(location) && condition.is_met(self)
-            })
+            .filter(move |(_, condition)| condition.is_met(self))
             .map(|(k, _)| &**k)
     }
 
@@ -190,6 +188,7 @@ impl Manager {
     /// either a waypoint or a transition
     fn next_reachable_location(&self) -> Option<&str> {
         self.reachable_locations()
+            .filter(|loc| !self.already_unlocked(loc))
             .find(|loc| self.items_at(loc).is_empty())
     }
 
