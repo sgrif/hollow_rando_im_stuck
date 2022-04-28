@@ -12,12 +12,11 @@ pub struct Manager {
     locations: Rc<HashMap<String, Condition>>,
     items: Rc<HashMap<String, Vec<Item>>>,
     transitions: Rc<HashMap<String, String>>,
-    cleared: HashSet<String>,
     acquired: HashMap<String, i32>,
 }
 
 impl Manager {
-    pub(crate) fn new(spoiler: RawSpoiler, cleared: HashSet<String>) -> Self {
+    pub(crate) fn new(spoiler: RawSpoiler, collected: Vec<(String, String)>) -> Self {
         let locations = spoiler
             .logic_manager
             .logic
@@ -54,12 +53,18 @@ impl Manager {
             locations: Rc::new(locations),
             items: Rc::new(items),
             transitions: Rc::new(transitions),
-            cleared,
             acquired,
         };
 
+        for (item_name, location) in collected {
+            for item in result.items_at(&location).to_vec() {
+                if item.name == item_name {
+                    item.effects.apply(&mut result);
+                }
+            }
+        }
+
         result.unlock_location(spoiler.start_def.transition);
-        result.collect_items_at_cleared_locations();
         result.unlock_all_reachable_locations();
 
         result
@@ -179,14 +184,6 @@ impl Manager {
             self.acquire(connected.to_string(), 1);
         }
         self.acquire(location, 1);
-    }
-
-    fn collect_items_at_cleared_locations(&mut self) {
-        for location in self.cleared.clone() {
-            for item in self.items_at(&location).to_vec() {
-                item.effects.apply(self)
-            }
-        }
     }
 }
 

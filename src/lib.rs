@@ -1,4 +1,3 @@
-use std::collections::HashSet;
 use std::error::Error;
 use std::io::prelude::*;
 use std::io::BufReader;
@@ -69,8 +68,9 @@ pub fn run(output: &mut impl Write, settings: Settings<impl Read>) -> Result<(),
     Ok(())
 }
 
-fn read_unlocked_locations(reader: impl Read) -> Result<HashSet<String>, Box<dyn Error>> {
-    const HEADER: &str = "LOCATION CLEARED --- {";
+fn read_unlocked_locations(reader: impl Read) -> Result<Vec<(String, String)>, Box<dyn Error>> {
+    const HEADER: &str = "ITEM OBTAINED --- {";
+    const SEP: &str = "} at {";
     let reader = BufReader::new(reader);
     reader
         .lines()
@@ -81,7 +81,11 @@ fn read_unlocked_locations(reader: impl Read) -> Result<HashSet<String>, Box<dyn
         })
         .map(|line| {
             let line = line?;
-            Ok(line[HEADER.len()..line.len() - 1].to_string())
+            let sep_location = line.find(SEP)
+                .ok_or("invalid ITEM OBTAINED line")?;
+            let item_name = line[HEADER.len()..sep_location].to_string();
+            let location_name = line[sep_location + SEP.len()..line.len() - 1].to_string();
+            Ok((item_name, location_name))
         })
         .collect()
 }
