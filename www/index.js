@@ -29,6 +29,14 @@ select_files.addEventListener("click", async function() {
 });
 
 run_button.addEventListener("click", async function() {
+  if (tracker_log.handle) {
+    if (await tracker_log.handle.requestPermission() == "granted") {
+      let handle = tracker_log.handle;
+      tracker_log = await tracker_log.handle.getFile();
+      tracker_log.handle = tracker_log.hanlde || handle;
+    }
+  }
+
   output.innerHTML = wasm.run(
     new Uint8Array(await raw_spoiler.arrayBuffer()),
     new Uint8Array(await tracker_log.arrayBuffer()),
