@@ -29,11 +29,11 @@ pub struct Logic {
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]
+#[serde(rename_all = "PascalCase")]
 pub struct ItemPlacement {
-    #[serde(rename = "Item")]
     pub item: ItemContainer,
-    #[serde(rename = "Location")]
     pub location: Location,
+    pub index: u16,
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]

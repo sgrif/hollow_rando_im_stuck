@@ -13,6 +13,7 @@ pub struct Manager {
     locations: Rc<HashMap<String, Condition>>,
     items: Rc<HashMap<String, Vec<Item>>>,
     transitions: Rc<HashMap<String, String>>,
+    picked_up: HashSet<u16>,
     acquired: HashMap<String, i32>,
 }
 
@@ -33,6 +34,7 @@ impl Manager {
             .map(|placement| {
                 let key = placement.location.def.name;
                 let value = Item {
+                    id: placement.index,
                     name: placement.item.inner.name,
                     effects: placement.item.inner.effects,
                     costs: placement.location.costs.unwrap_or_default(),
@@ -57,35 +59,41 @@ impl Manager {
             locations: Rc::new(locations),
             items: Rc::new(items),
             transitions: Rc::new(transitions),
+            picked_up: Default::default(),
             acquired,
         };
 
         for (item_name, location) in collected {
-            if let Some(item) = result.find_item(Some(&location), |item| item.name == item_name) {
-                item.effects.clone().apply(&mut result);
-            } else if !item_name.starts_with("100_Geo-") {
-                let item = result
-                    .find_item(None, |item| item.name == item_name)
-                    .ok_or_else(|| {
-                        format!(
-                            "Tracker Log indicated {} was picked up, but no item with that name was found",
-                            item_name
-                        )
-                    })?;
-                result
-                    .find_item(Some(&location), |other| {
-                        item.effects.has_same_effect_as(&other.effects)
-                    })
-                    .ok_or_else(|| {
-                        format!(
-                            "Could not find an item at {} with the same effects as {}",
-                            location, item_name
-                        )
-                    })?
-                    .effects
-                    .clone()
-                    .apply(&mut result);
+            if item_name.starts_with("100_Geo-") {
+                continue;
             }
+
+            let item = result
+                .find_item(Some(&location), |item| item.name == item_name)
+                .map(Ok)
+                .unwrap_or_else(|| {
+                    let item = result
+                        .find_item(None, |item| item.name == item_name)
+                        .ok_or_else(|| {
+                            format!(
+                                "Tracker Log indicated {} was picked up, but no item with that name was found",
+                                item_name
+                            )
+                        })?;
+                    result
+                        .find_item(Some(&location), |other| {
+                            item.effects.has_same_effect_as(&other.effects)
+                        })
+                        .ok_or_else(|| {
+                            format!(
+                                "Could not find an item at {} with the same effects as {}",
+                                location, item_name
+                            )
+                        })
+                })?;
+            let id = item.id;
+            item.effects.clone().apply(&mut result);
+            result.picked_up.insert(id);
         }
 
         result.unlock_location(spoiler.start_def.transition);
@@ -159,6 +167,7 @@ impl Manager {
     fn reachable_items(&self) -> impl Iterator<Item = (&str, &Item)> {
         self.reachable_locations()
             .flat_map(move |location| self.items_at(location).iter().map(move |l| (location, l)))
+            .filter(move |(_, item)| !self.picked_up.contains(&item.id))
     }
 
     fn affordable_items(&self) -> impl Iterator<Item = (&str, &Item)> {
@@ -224,6 +233,7 @@ impl Manager {
 
 #[derive(PartialEq, Eq, Hash, Debug, Clone)]
 pub struct Item {
+    id: u16,
     name: String,
     effects: Effects,
     costs: Vec<Cost>,
