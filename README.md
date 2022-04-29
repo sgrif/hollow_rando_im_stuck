@@ -48,8 +48,6 @@ logic, but I have no reason to believe that it will struggle with those.
 Known Issues
 ---
 
-- Items that were not randomized are not taken into account. This means we will
-  never point you at Grubfather if grub locations are not randomized.
 - The tool will only provide an answer if a single pickup or category of pickups
   (e.g. grubs, essence) would unlock a new location or item in a shop. It will
   fail if a new location is only unlocked by picking up two separate items.

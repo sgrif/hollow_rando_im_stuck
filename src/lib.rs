@@ -74,8 +74,9 @@ pub fn run(output: &mut impl Write, settings: Settings<impl Read>) -> Result<(),
 
 #[test]
 fn integration() -> Result<(), Box<dyn Error>> {
-    use std::path::Path;
+    use pretty_assertions::assert_eq;
     use std::fs::{self, File};
+    use std::path::Path;
 
     let root_path = Path::new(env!("CARGO_MANIFEST_DIR"));
     for entry in fs::read_dir(root_path.join("test_data"))? {

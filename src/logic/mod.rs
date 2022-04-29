@@ -7,7 +7,6 @@ pub use manager::Manager;
 
 mod manager;
 mod raw;
-mod vanilla_transitions;
 
 #[derive(PartialEq, Eq, Hash, Debug, Clone)]
 pub enum Condition {

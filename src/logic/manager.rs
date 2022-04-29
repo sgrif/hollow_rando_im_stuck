@@ -1,5 +1,5 @@
 use super::Condition;
-use crate::spoiler_log::{Cost, Effects, RawSpoiler};
+use crate::spoiler_log::{Cost, Effects, RawSpoiler, VanillaPlacement};
 use itertools::Itertools;
 use std::collections::{HashMap, HashSet};
 use std::error::Error;
@@ -28,26 +28,44 @@ impl Manager {
             .into_iter()
             .map(|l| (l.name, l.logic))
             .collect();
-        let items = spoiler
-            .items
-            .into_iter()
-            .map(|placement| {
-                let key = placement.location.def.name;
-                let value = Item {
-                    id: placement.index,
-                    name: placement.item.inner.name,
-                    effects: placement.item.inner.effects,
-                    costs: placement.location.costs.unwrap_or_default(),
-                };
-                (key, value)
-            })
-            .into_group_map();
+        let max_id = spoiler.items.len();
+        let items = spoiler.items.into_iter().map(|placement| {
+            let key = placement.location.def.name;
+            let value = Item {
+                id: placement.index,
+                name: placement.item.inner.name,
+                effects: placement.item.inner.effects,
+                costs: placement.location.costs.unwrap_or_default(),
+            };
+            (key, value)
+        });
         let transitions = spoiler
             .transitions
             .unwrap_or_default()
             .into_iter()
-            .map(|placement| (placement.source.name, placement.target.name))
-            .collect();
+            .map(|placement| (placement.source.name, placement.target.name));
+
+        let (vanilla_items, vanilla_transitions): (Vec<_>, Vec<_>) = spoiler
+            .vanilla_placements
+            .into_iter()
+            .partition_map(VanillaPlacement::decompose);
+        let transitions = transitions.chain(vanilla_transitions).collect();
+        let vanilla_items =
+            vanilla_items
+                .into_iter()
+                .enumerate()
+                .map(|(idx, (location_name, item))| {
+                    (
+                        location_name,
+                        Item {
+                            id: (max_id + idx) as _,
+                            name: item.name,
+                            effects: item.effects,
+                            costs: Vec::new(),
+                        },
+                    )
+                });
+        let items = items.chain(vanilla_items).into_group_map();
 
         let mut acquired = HashMap::new();
         acquired.insert("TRUE".into(), 1);
@@ -94,6 +112,15 @@ impl Manager {
             let id = item.id;
             item.effects.clone().apply(&mut result);
             result.picked_up.insert(id);
+        }
+
+        for item in result.items.get("Start").unwrap().to_vec() {
+            if result.picked_up.contains(&item.id) {
+                continue;
+            }
+
+            item.effects.apply(&mut result);
+            result.picked_up.insert(item.id);
         }
 
         result.unlock_location(spoiler.start_def.transition);
@@ -212,8 +239,6 @@ impl Manager {
     fn unlock_location(&mut self, location: String) {
         if let Some(connected) = self.transitions.get(&location).cloned() {
             self.acquire(connected, 1);
-        } else if let Some(connected) = super::vanilla_transitions::TRANSITIONS.get(&location) {
-            self.acquire(connected.to_string(), 1);
         }
         self.acquire(location, 1);
     }

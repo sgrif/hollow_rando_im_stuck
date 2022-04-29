@@ -1,7 +1,10 @@
 use crate::logic::{self, Condition};
+use itertools::Either;
 
 #[derive(Debug, Clone, serde::Deserialize)]
 pub(crate) struct RawSpoiler {
+    #[serde(rename = "Vanilla")]
+    pub vanilla_placements: Vec<VanillaPlacement>,
     #[serde(rename = "LM")]
     pub logic_manager: RawLogicManager,
     #[serde(rename = "itemPlacements")]
@@ -201,4 +204,47 @@ pub struct StartDef {
 #[serde(rename_all = "PascalCase")]
 pub struct InitialProgression {
     pub setters: Vec<Effect>,
+}
+
+#[derive(Debug, Clone, serde::Deserialize)]
+#[serde(untagged)]
+pub enum VanillaPlacement {
+    Transition {
+        #[serde(rename = "Item")]
+        destination: VanillaLocation,
+        #[serde(rename = "Location")]
+        source: VanillaLocation,
+    },
+    #[serde(rename_all = "PascalCase")]
+    Item { item: Item, location: LocationDef },
+    #[serde(rename_all = "PascalCase")]
+    Item2 {
+        item: Item,
+        location: UnnamedLocationDef,
+    },
+}
+
+impl VanillaPlacement {
+    /// Decomposes into an itertools::Either of a location name/item pair,
+    /// or source/target transition name pair.
+    pub(crate) fn decompose(self) -> Either<(String, Item), (String, String)> {
+        match self {
+            Self::Transition {
+                source,
+                destination,
+            } => Either::Right((source.term, destination.term)),
+            Self::Item { item, location } => Either::Left((location.name, item)),
+            Self::Item2 { item, location } => Either::Left((location.logic.name, item)),
+        }
+    }
+}
+
+#[derive(Debug, Clone, serde::Deserialize)]
+pub struct VanillaLocation {
+    pub term: String,
+}
+
+#[derive(Debug, Clone, serde::Deserialize)]
+pub struct UnnamedLocationDef {
+    pub logic: Logic,
 }

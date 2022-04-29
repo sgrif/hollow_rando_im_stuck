@@ -1,0 +1,77 @@
+Starting tracker log for new randomizer file.
+
+ITEM OBTAINED --- {351_Geo} at {Start}
+LOCATION CLEARED --- {Start}
+ITEM OBTAINED --- {Wanderer's_Journal} at {Dream_Nail}
+LOCATION CLEARED --- {Dream_Nail}
+LOCATION PREVIEWED --- {Seer}
+ITEM OBTAINED --- {King's_Idol} at {Dreamshield}
+LOCATION CLEARED --- {Dreamshield}
+ITEM OBTAINED --- {Stag_Nest_Stag} at {Resting_Grounds_Stag}
+LOCATION CLEARED --- {Resting_Grounds_Stag}
+LOCATION PREVIEWED --- {Stag_Nest_Stag}
+ITEM OBTAINED --- {Elevator_Pass} at {Stag_Nest_Stag}
+LOCATION CLEARED --- {Stag_Nest_Stag}
+ITEM OBTAINED --- {Sharp_Shadow} at {Vessel_Fragment-Stag_Nest}
+LOCATION CLEARED --- {Vessel_Fragment-Stag_Nest}
+LOCATION PREVIEWED --- {Cyclone_Slash}
+ITEM OBTAINED --- {Geo_Chest-Greenpath} at {Cyclone_Slash}
+LOCATION CLEARED --- {Cyclone_Slash}
+ITEM OBTAINED --- {Desolate_Dive} at {Fury_of_the_Fallen}
+LOCATION CLEARED --- {Fury_of_the_Fallen}
+LOCATION PREVIEWED --- {Iselda}
+ITEM OBTAINED --- {Great_Slash} at {Iselda}
+LOCATION PREVIEWED --- {Iselda}
+ITEM OBTAINED --- {Geo_Chest-Weavers_Den} at {Iselda}
+LOCATION PREVIEWED --- {Iselda}
+LOCATION PREVIEWED --- {Iselda}
+ITEM OBTAINED --- {Simple_Key} at {Iselda}
+LOCATION PREVIEWED --- {Iselda}
+ITEM OBTAINED --- {Mantis_Claw} at {Hallownest_Seal-Fog_Canyon_West}
+LOCATION CLEARED --- {Hallownest_Seal-Fog_Canyon_West}
+LOCATION PREVIEWED --- {Queen's_Station_Stag}
+ITEM OBTAINED --- {Wanderer's_Journal} at {Queen's_Station_Stag}
+LOCATION CLEARED --- {Queen's_Station_Stag}
+ITEM OBTAINED --- {Charm_Notch} at {Hallownest_Seal-Fungal_Wastes_Sporgs}
+LOCATION CLEARED --- {Hallownest_Seal-Fungal_Wastes_Sporgs}
+ITEM OBTAINED --- {Deep_Focus} at {Charm_Notch-Shrumal_Ogres}
+LOCATION CLEARED --- {Charm_Notch-Shrumal_Ogres}
+LOCATION PREVIEWED --- {Leg_Eater}
+ITEM OBTAINED --- {Geo_Chest-Resting_Grounds} at {Leg_Eater}
+LOCATION PREVIEWED --- {Leg_Eater}
+LOCATION PREVIEWED --- {Leg_Eater}
+ITEM OBTAINED --- {Hallownest_Seal} at {Leg_Eater}
+LOCATION PREVIEWED --- {Leg_Eater}
+ITEM OBTAINED --- {Isma's_Tear} at {Wanderer's_Journal-Above_Mantis_Village}
+LOCATION CLEARED --- {Wanderer's_Journal-Above_Mantis_Village}
+ITEM OBTAINED --- {Charm_Notch} at {Hallownest_Seal-Mantis_Lords}
+LOCATION CLEARED --- {Hallownest_Seal-Mantis_Lords}
+ITEM OBTAINED --- {Mask_Shard} at {Geo_Chest-Mantis_Lords}
+LOCATION CLEARED --- {Geo_Chest-Mantis_Lords}
+ITEM OBTAINED --- {Salubra's_Blessing} at {Mark_of_Pride}
+LOCATION CLEARED --- {Mark_of_Pride}
+ITEM OBTAINED --- {Simple_Key} at {Dashmaster}
+LOCATION CLEARED --- {Dashmaster}
+LOCATION PREVIEWED --- {Iselda}
+ITEM OBTAINED --- {Descending_Dark} at {Hallownest_Seal-Crossroads_Well}
+LOCATION CLEARED --- {Hallownest_Seal-Crossroads_Well}
+ITEM OBTAINED --- {Longnail} at {Mask_Shard-Crossroads_Goam}
+LOCATION CLEARED --- {Mask_Shard-Crossroads_Goam}
+LOCATION PREVIEWED --- {Crossroads_Stag}
+ITEM OBTAINED --- {Rancid_Egg} at {Crossroads_Stag}
+LOCATION CLEARED --- {Crossroads_Stag}
+LOCATION PREVIEWED --- {Elevator_Pass}
+ITEM OBTAINED --- {King's_Idol} at {Elevator_Pass}
+LOCATION CLEARED --- {Elevator_Pass}
+ITEM OBTAINED --- {Dream_Nail} at {Wanderer's_Journal-City_Storerooms}
+LOCATION CLEARED --- {Wanderer's_Journal-City_Storerooms}
+ITEM OBTAINED --- {Joni's_Blessing} at {Rancid_Egg-City_of_Tears_Left}
+LOCATION CLEARED --- {Rancid_Egg-City_of_Tears_Left}
+LOCATION PREVIEWED --- {Leg_Eater}
+ITEM OBTAINED --- {Elegant_Key} at {Leg_Eater}
+LOCATION PREVIEWED --- {Leg_Eater}
+ITEM OBTAINED --- {Fragile_Greed} at {Leg_Eater}
+LOCATION PREVIEWED --- {Leg_Eater}
+ITEM OBTAINED --- {Mask_Shard} at {Leg_Eater}
+LOCATION PREVIEWED --- {Leg_Eater}
+LOCATION PREVIEWED --- {Grubfather}

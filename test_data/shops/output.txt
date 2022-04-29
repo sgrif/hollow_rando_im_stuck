@@ -1,3 +1,5 @@
+Getting Boss_Essence-Lost_Kin at Boss_Essence-Lost_Kin will unlock:
+- Opened_Glade_Door
 Getting Love_Key at Grub-Dark_Deepnest will unlock:
 - Ruins2_11_b[left1]
 Getting Cyclone_Slash at Grub-Deepnest_Nosk will unlock:
@@ -13,3 +15,4 @@ Getting King's_Brand at Tram_Pass will unlock:
 - Geo_Rock-Abyss_1
 - Geo_Rock-Abyss_2
 - Geo_Rock-Abyss_3
+Getting all reachable essence will unlock 1 items at Seer

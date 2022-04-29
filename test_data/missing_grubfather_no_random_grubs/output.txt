@@ -1,0 +1,19 @@
+Getting Spore_Shroom at City_Crest will unlock:
+- Lore_Tablet-Fungal_Wastes_Below_Shrumal_Ogres
+- Lore_Tablet-Fungal_Wastes_Hidden
+Getting Unbreakable_Heart at Desolate_Dive will unlock:
+- Unbreakable_Heart
+Getting King's_Brand at Hallownest_Seal-Fog_Canyon_East will unlock:
+- Abyss_06_Core
+- Geo_Rock-Abyss_1
+- Geo_Rock-Abyss_2
+- Geo_Rock-Abyss_3
+Getting Unbreakable_Strength at Hallownest_Seal-Resting_Grounds_Catacombs will unlock:
+- Unbreakable_Strength
+Getting Queen's_Gardens_Stag at Vessel_Fragment-Deepnest will unlock:
+- Fungus3_40[right1]
+- Fungus3_40[top1]
+- Opened_Gardens_Stag_Exit
+- Queen's_Gardens_Stag
+Getting all reachable grubs will unlock 6 items at Grubfather
+Getting all reachable essence will unlock 1 items at Seer
