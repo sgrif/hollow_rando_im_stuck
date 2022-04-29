@@ -28,7 +28,8 @@
   "homepage": "https://github.com/rustwasm/create-wasm-app#readme",
   "dependencies": {
     "browser-fs-access": "^0.29.1",
-    "hollow-rando-im-stuck": "file:../wasm/pkg"
+    "hollow-rando-im-stuck": "file:../wasm/pkg",
+    "idb-keyval": "^6.1.0"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.0.0",
