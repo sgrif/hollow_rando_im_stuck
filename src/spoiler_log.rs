@@ -197,6 +197,7 @@ impl Cost {
 #[derive(Debug, Clone, serde::Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct StartDef {
+    pub name: String,
     pub transition: String,
 }
 

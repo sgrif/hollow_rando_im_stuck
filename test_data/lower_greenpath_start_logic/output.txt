@@ -1,0 +1,10 @@
+Getting Resting_Grounds_Stag at Queen's_Station_Stag will unlock:
+- RestingGrounds_09[left1]
+- Resting_Grounds_Map
+- Resting_Grounds_Stag
+Getting Mantis_Claw at Vessel_Fragment-Greenpath will unlock:
+- Fungus2_01[right1]
+- Fungus3_44[door1]
+- Geo_Rock-Greenpath_Acid_Bridge
+- Geo_Rock-Queen's_Gardens_Acid_Entrance
+- Wanderer's_Journal-Greenpath_Lower
