@@ -1,0 +1,20 @@
+Getting Elevator_Pass at Distant_Village_Stag will unlock:
+- Left_Elevator
+Getting Stag_Nest_Stag at Hallownest_Seal-Beast's_Den will unlock:
+- Cliffs_03[right1]
+- Vessel_Fragment-Stag_Nest
+Getting Grimmchild2 at Iselda will unlock:
+- Grimmkin_Flame-Greenpath
+- Grimmkin_Flame-King's_Pass
+- Nightmare_Lantern_Lit
+Getting City_Storerooms_Stag at Salubra will unlock:
+- City_Storerooms_Stag
+- Ruins1_29[left1]
+Getting Shade_Soul at Salubra will unlock:
+- Baldur_Shell
+- Boss_Geo-Vengefly_King
+- Geo_Rock-Ancestral_Mound
+- Geo_Rock-Ancestral_Mound_Dupe
+- Lifeblood_Cocoon-Ancestral_Mound
+- Soul_Catcher
+- Soul_Totem-Ancestral_Mound

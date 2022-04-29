@@ -1,0 +1,31 @@
+Getting Elevator_Pass at Distant_Village_Stag will unlock:
+- Left_Elevator
+Getting Grimmchild2 at Iselda will unlock:
+- Grimmkin_Flame-Greenpath
+- Grimmkin_Flame-King's_Pass
+- Nightmare_Lantern_Lit
+Getting Desolate_Dive at Leg_Eater will unlock:
+- Baldur_Shell
+- Boss_Geo-Vengefly_King
+- Geo_Rock-Ancestral_Mound
+- Geo_Rock-Ancestral_Mound_Dupe
+- Geo_Rock-Crossroads_Goam_Journal
+- Geo_Rock-Crossroads_Goam_Journal_Dupe
+- Journal_Entry-Goam
+- Lifeblood_Cocoon-Ancestral_Mound
+- Mines_01[bot1]
+- Rancid_Egg-Crystal_Peak_Dive_Entrance
+- RestingGrounds_05[bot1]
+- Soul_Catcher
+- Soul_Totem-Ancestral_Mound
+Getting City_Storerooms_Stag at Salubra will unlock:
+- City_Storerooms_Stag
+- Ruins1_29[left1]
+Getting Shade_Soul at Salubra will unlock:
+- Baldur_Shell
+- Boss_Geo-Vengefly_King
+- Geo_Rock-Ancestral_Mound
+- Geo_Rock-Ancestral_Mound_Dupe
+- Lifeblood_Cocoon-Ancestral_Mound
+- Soul_Catcher
+- Soul_Totem-Ancestral_Mound

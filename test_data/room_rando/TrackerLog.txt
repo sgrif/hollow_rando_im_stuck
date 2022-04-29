@@ -1,0 +1,5 @@
+Starting tracker log for new randomizer file.
+
+ITEM OBTAINED --- {401_Geo} at {Start}
+LOCATION CLEARED --- {Start}
+LOCATION CLEARED --- {Hallownest_Seal-Fungal_Wastes_Sporgs}

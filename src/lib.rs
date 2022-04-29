@@ -23,8 +23,8 @@ pub fn run(output: &mut impl Write, settings: Settings<impl Read>) -> Result<(),
         tracker_log::read(settings.tracker_log)?,
     )?;
 
-    let key_items = logic_manager.reachable_key_items();
-    let cost_unlocks = logic_manager.reachable_cost_unlocks();
+    let mut key_items = logic_manager.reachable_key_items();
+    let mut cost_unlocks = logic_manager.reachable_cost_unlocks();
     if key_items.is_empty() && cost_unlocks.is_empty() {
         writeln!(
             output,
@@ -34,7 +34,8 @@ pub fn run(output: &mut impl Write, settings: Settings<impl Read>) -> Result<(),
         )?;
     }
 
-    for key_item in key_items {
+    key_items.sort_by(|left, right| left.location.cmp(&right.location));
+    for mut key_item in key_items {
         write!(output, "Getting ")?;
         if settings.show_items {
             write!(output, "{}", key_item.item)?;
@@ -43,6 +44,7 @@ pub fn run(output: &mut impl Write, settings: Settings<impl Read>) -> Result<(),
         }
         write!(output, " at {} will unlock", key_item.location)?;
         if settings.show_unlocked_locations {
+            key_item.unlocked_locations.sort();
             writeln!(output, ":")?;
             for location in key_item.unlocked_locations {
                 writeln!(output, "- {}", location)?;
@@ -52,6 +54,7 @@ pub fn run(output: &mut impl Write, settings: Settings<impl Read>) -> Result<(),
         }
     }
 
+    cost_unlocks.sort_by(|left, right| left.location.cmp(&right.location));
     for cost_unlock in cost_unlocks {
         write!(
             output,
@@ -64,6 +67,31 @@ pub fn run(output: &mut impl Write, settings: Settings<impl Read>) -> Result<(),
         } else {
             writeln!(output, "a shop")?;
         }
+    }
+
+    Ok(())
+}
+
+#[test]
+fn integration() -> Result<(), Box<dyn Error>> {
+    use std::path::Path;
+    use std::fs::{self, File};
+
+    let root_path = Path::new(env!("CARGO_MANIFEST_DIR"));
+    for entry in fs::read_dir(root_path.join("test_data"))? {
+        let path = entry?.path();
+        let raw_spoiler = File::open(path.join("RawSpoiler.json"))?;
+        let tracker_log = File::open(path.join("TrackerLog.txt"))?;
+        let settings = Settings {
+            raw_spoiler,
+            tracker_log,
+            show_unlocked_locations: true,
+            show_items: true,
+        };
+        let mut output = Vec::new();
+        run(&mut output, settings)?;
+        let expected = fs::read_to_string(path.join("output.txt"))?;
+        assert_eq!(expected, String::from_utf8(output)?);
     }
 
     Ok(())

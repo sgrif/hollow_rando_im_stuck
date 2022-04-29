@@ -1,0 +1,19 @@
+Getting Dream_Gate at Hallownest_Seal-Fungal_Wastes_Sporgs will unlock:
+- Lurien
+- Whispering_Root-City
+- Whispering_Root-Leg_Eater
+- Whispering_Root-Resting_Grounds
+Getting Dirtmouth_Stag at Iselda will unlock:
+- Room_Town_Stag_Station[left1]
+- Town[door_station]
+Getting Grimmchild1 at Leg_Eater will unlock:
+- Grimmkin_Flame-City_Storerooms
+- Nightmare_Lantern_Lit
+Getting City_Storerooms_Stag at Leg_Eater will unlock:
+- City_Storerooms_Stag
+- Ruins1_29[left1]
+Getting Boss_Essence-Lost_Kin at Rancid_Egg-Crystal_Peak_Dark_Room will unlock:
+- Opened_Glade_Door
+Getting all reachable rancideggs will unlock 2 items at Egg_Shop
+Getting all reachable grubs will unlock 5 items at Grubfather
+Getting all reachable essence will unlock 8 items at Seer
