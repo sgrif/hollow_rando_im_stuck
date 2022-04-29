@@ -17,4 +17,3 @@ Getting Queen's_Gardens_Stag at Vessel_Fragment-Deepnest will unlock:
 - Queen's_Gardens_Stag
 Getting all reachable grubs will unlock 6 items at Grubfather
 Getting all reachable charms will unlock 3 items at Salubra
-Getting all reachable essence will unlock 1 items at Seer

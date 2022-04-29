@@ -18,5 +18,5 @@ Getting Boss_Essence-Lost_Kin at Rancid_Egg-Crystal_Peak_Dark_Room will unlock:
 Getting Grubberfly's_Elegy at Wanderer's_Journal-City_Storerooms will unlock:
 - Baldur_Shell
 Getting all reachable rancideggs will unlock 2 items at Egg_Shop
-Getting all reachable grubs will unlock 5 items at Grubfather
+Getting all reachable grubs will unlock 4 items at Grubfather
 Getting all reachable essence will unlock 8 items at Seer

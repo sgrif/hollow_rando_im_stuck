@@ -165,7 +165,6 @@ impl Manager {
             .into_iter()
             .flat_map(|term| {
                 let mut copy = self.clone();
-                copy.acquired.remove(term);
                 for (_, item) in &affordable_items {
                     item.effects.apply_only(term, &mut copy);
                 }
@@ -369,8 +368,9 @@ fn unaffordable_costs() {
 
     // 1 grub collected, 1 reachable grub
     manager.acquired.insert("GRUBS".into(), 1);
+    manager.picked_up.insert(2);
 
-    assert_eq!(2, manager.affordable_items().count());
+    assert_eq!(1, manager.affordable_items().count());
     assert_eq!(1, manager.reachable_key_items().len());
     assert_eq!(0, manager.reachable_cost_unlocks().len());
 }

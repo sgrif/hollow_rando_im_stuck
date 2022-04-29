@@ -39,4 +39,4 @@ Getting King's_Station_Stag at Leg_Eater will unlock:
 Getting Hidden_Station_Stag at Salubra will unlock:
 - Abyss_22[left1]
 - Hidden_Station_Stag
-Getting all reachable charms will unlock 4 items at Salubra
+Getting all reachable charms will unlock 5 items at Salubra
