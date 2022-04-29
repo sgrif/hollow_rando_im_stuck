@@ -39,8 +39,9 @@ Run `hollow_rando_im_stuck --help` for more info
 Development Status
 ---
 
-This is a very early proof of concept, and likely has many edge cases that I are
-not yet handled. See the list of known issues below.
+This tool is in a somewhat early stage. It should be mostly feature complete
+short of some obscure edge cases, but still needs comprehensive testing to find
+any major bugs.
 
 This has not yet been tested with mods that add new items/checks or modify the
 logic, but I have no reason to believe that it will struggle with those.
