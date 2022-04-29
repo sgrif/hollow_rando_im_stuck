@@ -30,7 +30,7 @@ impl Manager {
             .collect();
         let max_id = spoiler.items.len();
         let items = spoiler.items.into_iter().map(|placement| {
-            let key = placement.location.def.name;
+            let key = placement.location.logic.name;
             let value = Item {
                 id: placement.index,
                 name: placement.item.inner.name,

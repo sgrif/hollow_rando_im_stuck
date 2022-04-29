@@ -55,8 +55,7 @@ pub struct Item {
 
 #[derive(Debug, Clone, serde::Deserialize)]
 pub struct Location {
-    #[serde(rename = "LocationDef")]
-    pub def: LocationDef,
+    pub logic: Logic,
     pub costs: Option<Vec<Cost>>,
 }
 

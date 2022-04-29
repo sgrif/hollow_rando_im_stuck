@@ -92,7 +92,7 @@ fn integration() -> Result<(), Box<dyn Error>> {
         let mut output = Vec::new();
         run(&mut output, settings)?;
         let expected = fs::read_to_string(path.join("output.txt"))?;
-        assert_eq!(expected, String::from_utf8(output)?);
+        assert_eq!(expected, String::from_utf8(output)?, "{}", path.display());
     }
 
     Ok(())

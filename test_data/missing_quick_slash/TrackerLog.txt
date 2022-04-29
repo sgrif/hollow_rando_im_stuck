@@ -1,0 +1,34 @@
+Starting tracker log for new randomizer file.
+
+ITEM OBTAINED --- {538_Geo} at {Start}
+LOCATION CLEARED --- {Start}
+ITEM OBTAINED --- {Rancid_Egg} at {Vessel_Fragment-Greenpath}
+LOCATION CLEARED --- {Vessel_Fragment-Greenpath}
+ITEM OBTAINED --- {Mantis_Claw} at {Geo_Chest-Greenpath}
+LOCATION CLEARED --- {Geo_Chest-Greenpath}
+ITEM OBTAINED --- {Rancid_Egg} at {Hallownest_Seal-Fog_Canyon_West}
+LOCATION CLEARED --- {Hallownest_Seal-Fog_Canyon_West}
+ITEM OBTAINED --- {Vessel_Fragment} at {Howling_Wraiths}
+LOCATION CLEARED --- {Howling_Wraiths}
+ITEM OBTAINED --- {Lifeblood_Heart} at {Wanderer's_Journal-Greenpath_Lower}
+LOCATION CLEARED --- {Wanderer's_Journal-Greenpath_Lower}
+LOCATION PREVIEWED --- {Queen's_Station_Stag}
+ITEM OBTAINED --- {Resting_Grounds_Stag} at {Queen's_Station_Stag}
+LOCATION CLEARED --- {Queen's_Station_Stag}
+ITEM OBTAINED --- {Hiveblood} at {Hallownest_Seal-Fungal_Wastes_Sporgs}
+LOCATION CLEARED --- {Hallownest_Seal-Fungal_Wastes_Sporgs}
+ITEM OBTAINED --- {Mothwing_Cloak} at {Charm_Notch-Shrumal_Ogres}
+LOCATION CLEARED --- {Charm_Notch-Shrumal_Ogres}
+LOCATION PREVIEWED --- {Leg_Eater}
+ITEM OBTAINED --- {Spell_Twister} at {Leg_Eater}
+LOCATION PREVIEWED --- {Leg_Eater}
+ITEM OBTAINED --- {Vessel_Fragment} at {Mask_Shard-Crossroads_Goam}
+LOCATION CLEARED --- {Mask_Shard-Crossroads_Goam}
+LOCATION PREVIEWED --- {Crossroads_Stag}
+ITEM OBTAINED --- {100_Geo-Mantis_Claw} at {Crossroads_Stag}
+LOCATION CLEARED --- {Crossroads_Stag}
+LOCATION PREVIEWED --- {Salubra}
+ITEM OBTAINED --- {Shaman_Stone} at {Salubra}
+LOCATION PREVIEWED --- {Salubra}
+ITEM OBTAINED --- {Quick_Slash} at {Salubra}
+LOCATION PREVIEWED --- {Salubra}

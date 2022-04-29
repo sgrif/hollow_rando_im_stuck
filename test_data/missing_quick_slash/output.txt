@@ -1,0 +1,42 @@
+Getting Dream_Nail at Cyclone_Slash will unlock:
+- Nightmare_Lantern_Lit
+- Whispering_Root-Ancestral_Mound
+- Whispering_Root-Crossroads
+- Whispering_Root-Howling_Cliffs
+- Whispering_Root-Mantis_Village
+- Whispering_Root-Resting_Grounds
+Getting Grubberfly's_Elegy at Geo_Chest-False_Knight will unlock:
+- Baldur_Shell
+Getting Tram_Pass at Greenpath_Stag will unlock:
+- Lower_Tram
+- Upper_Tram
+Getting Monarch_Wings at Hallownest_Seal-Crossroads_Well will unlock:
+- Cliffs_02[left2]
+- Cliffs_02[right1]
+- Crossroads_04[right1]
+- Deepnest_03[left2]
+- Fungus1_09[left1]
+- Fungus2_29[bot1]
+- Geo_Rock-Ancestral_Mound_Tree
+- Geo_Rock-Ancestral_Mound_Tree_Dupe
+- Geo_Rock-Fungal_Core_Entrance
+- Hallownest_Seal-Queen's_Station
+- Lifeblood_Cocoon-Mantis_Village
+- Rancid_Egg-Fungal_Core
+- Soul_Totem-Fungal_Core
+Getting Grimmchild2 at Iselda will unlock:
+- Grimmkin_Flame-Greenpath
+- Grimmkin_Flame-King's_Pass
+- Nightmare_Lantern_Lit
+Getting Stag_Nest_Stag at Iselda will unlock:
+- Cliffs_03[right1]
+- Vessel_Fragment-Stag_Nest
+Getting Weaversong at Leg_Eater will unlock:
+- Baldur_Shell
+Getting King's_Station_Stag at Leg_Eater will unlock:
+- King's_Station_Stag
+- Ruins2_08[left1]
+Getting Hidden_Station_Stag at Salubra will unlock:
+- Abyss_22[left1]
+- Hidden_Station_Stag
+Getting all reachable charms will unlock 4 items at Salubra
