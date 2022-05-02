@@ -216,8 +216,12 @@ impl Manager {
             .unwrap_or(&[])
     }
 
-    fn already_unlocked(&self, item: &str) -> bool {
-        self.acquired_amount(item) != 0
+    fn already_unlocked(&self, location: &str) -> bool {
+        let unlocked_target = self.transitions.get(location)
+            .map(|loc| self.acquired_amount(loc) != 0)
+            .unwrap_or(true);
+        let unlocked_source = self.acquired_amount(location) != 0;
+        unlocked_target && unlocked_source
     }
 
     /// Returns the first reachable location that has no items, meaning it is

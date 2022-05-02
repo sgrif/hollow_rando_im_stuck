@@ -1,0 +1,195 @@
+Starting tracker log for new randomizer file.
+
+ITEM OBTAINED --- {547_Geo} at {Start}
+LOCATION CLEARED --- {Start}
+ITEM OBTAINED --- {Geo_Rock-Default} at {Geo_Rock-King's_Pass_Left}
+LOCATION CLEARED --- {Geo_Rock-King's_Pass_Left}
+ITEM OBTAINED --- {Soul_Totem-Palace} at {Geo_Rock-King's_Pass_Below_Fury}
+LOCATION CLEARED --- {Geo_Rock-King's_Pass_Below_Fury}
+ITEM OBTAINED --- {Lore_Tablet-Palace_Workshop} at {Lore_Tablet-King's_Pass_Focus}
+LOCATION CLEARED --- {Lore_Tablet-King's_Pass_Focus}
+ITEM OBTAINED --- {Geo_Rock-Default} at {Geo_Rock-King's_Pass_Hidden}
+LOCATION CLEARED --- {Geo_Rock-King's_Pass_Hidden}
+ITEM OBTAINED --- {Geo_Rock-Default} at {Lifeblood_Cocoon-King's_Pass}
+LOCATION CLEARED --- {Lifeblood_Cocoon-King's_Pass}
+ITEM OBTAINED --- {Heavy_Blow} at {Geo_Rock-King's_Pass_Collapse}
+LOCATION CLEARED --- {Geo_Rock-King's_Pass_Collapse}
+ITEM OBTAINED --- {Geo_Rock-Deepnest} at {Geo_Rock-King's_Pass_Above_Fury}
+LOCATION CLEARED --- {Geo_Rock-King's_Pass_Above_Fury}
+ITEM OBTAINED --- {Geo_Rock-Deepnest} at {Lore_Tablet-King's_Pass_Fury}
+LOCATION CLEARED --- {Lore_Tablet-King's_Pass_Fury}
+ITEM OBTAINED --- {Grub} at {Fury_of_the_Fallen}
+LOCATION CLEARED --- {Fury_of_the_Fallen}
+ITEM OBTAINED --- {City_of_Tears_Map} at {Lore_Tablet-King's_Pass_Exit}
+LOCATION CLEARED --- {Lore_Tablet-King's_Pass_Exit}
+TRANSITION --- {Tutorial_01[right1]} --> {Hive_03[top1]}
+ITEM OBTAINED --- {King's_Idol} at {Grub-Hive_External}
+LOCATION CLEARED --- {Grub-Hive_External}
+TRANSITION --- {Hive_03[top1]} --> {Crossroads_49b[right1]}
+LOCATION PREVIEWED --- {Elevator_Pass}
+TRANSITION --- {Crossroads_49b[right1]} --> {Ruins1_03[top1]}
+ITEM OBTAINED --- {Geo_Rock-City} at {Geo_Rock-City_of_Tears_Quirrel}
+LOCATION CLEARED --- {Geo_Rock-City_of_Tears_Quirrel}
+ITEM OBTAINED --- {Geo_Rock-GreenPath01} at {Hallownest_Seal-City_Rafters}
+LOCATION CLEARED --- {Hallownest_Seal-City_Rafters}
+TRANSITION --- {Ruins1_03[right1]} --> {Cliffs_02[door1]}
+TRANSITION --- {Cliffs_02[door1]} --> {RestingGrounds_06[left1]}
+TRANSITION --- {RestingGrounds_06[left1]} --> {Fungus3_10[bot1]}
+TRANSITION --- {Fungus3_10[bot1]} --> {Fungus1_22[top1]}
+ITEM OBTAINED --- {Geo_Rock-Default} at {Wanderer's_Journal-Greenpath_Stag}
+LOCATION CLEARED --- {Wanderer's_Journal-Greenpath_Stag}
+ITEM OBTAINED --- {Grimmkin_Flame} at {Geo_Rock-Greenpath_Below_Stag}
+LOCATION CLEARED --- {Geo_Rock-Greenpath_Below_Stag}
+ITEM OBTAINED --- {Lore_Tablet-Sanctum_Past_Soul_Master} at {Geo_Rock-Greenpath_Below_Stag_Fool_Eater}
+LOCATION CLEARED --- {Geo_Rock-Greenpath_Below_Stag_Fool_Eater}
+TRANSITION --- {Fungus1_22[bot1]} --> {Crossroads_43[left1]}
+TRANSITION --- {Crossroads_43[right1]} --> {Fungus1_Slug[right1]}
+TRANSITION --- {Fungus1_Slug[right1]} --> {Deepnest_East_03[right2]}
+LOCATION PREVIEWED --- {Kingdom's_Edge_Map}
+TRANSITION --- {Deepnest_East_03[left1]} --> {Room_Town_Stag_Station[left1]}
+TRANSITION --- {Room_Town_Stag_Station[left1]} --> {Fungus2_07[left1]}
+TRANSITION --- {Fungus2_07[left1]} --> {Fungus1_32[left1]}
+ITEM OBTAINED --- {Wanderer's_Journal} at {Lifeblood_Cocoon-Greenpath}
+LOCATION CLEARED --- {Lifeblood_Cocoon-Greenpath}
+ITEM OBTAINED --- {Geo_Rock-Default} at {Lore_Tablet-Greenpath_Lifeblood}
+LOCATION CLEARED --- {Lore_Tablet-Greenpath_Lifeblood}
+TRANSITION --- {Fungus1_32[left1]} --> {Deepnest_30[right1]}
+TRANSITION --- {Deepnest_30[left1]} --> {Crossroads_30[left1]}
+TRANSITION --- {Crossroads_30[left1]} --> {Mines_37[top1]}
+TRANSITION --- {Mines_37[top1]} --> {Mines_13[right1]}
+TRANSITION --- {Mines_13[right1]} --> {Room_Colosseum_02[top1]}
+TRANSITION --- {Mines_13[bot1]} --> {Fungus3_24[top1]}
+TRANSITION --- {Fungus3_24[top1]} --> {Ruins1_23[right2]}
+TRANSITION --- {Ruins1_23[right2]} --> {Mines_02[left1]}
+ITEM OBTAINED --- {Soul_Totem-Path_of_Pain} at {Geo_Rock-Crystal_Peak_Lower_Conveyer_1}
+LOCATION CLEARED --- {Geo_Rock-Crystal_Peak_Lower_Conveyer_1}
+ITEM OBTAINED --- {Grub} at {Geo_Rock-Crystal_Peak_Lower_Conveyer_2}
+LOCATION CLEARED --- {Geo_Rock-Crystal_Peak_Lower_Conveyer_2}
+TRANSITION --- {Mines_02[right1]} --> {Deepnest_East_03[right1]}
+TRANSITION --- {Deepnest_East_03[right1]} --> {Mines_30[right1]}
+LOCATION PREVIEWED --- {Crystal_Peak_Map}
+ITEM OBTAINED --- {Mask_Shard} at {Crystal_Peak_Map}
+LOCATION CLEARED --- {Crystal_Peak_Map}
+TRANSITION --- {Mines_30[right1]} --> {Fungus3_05[right2]}
+TRANSITION --- {Fungus3_05[right2]} --> {Deepnest_East_07[bot1]}
+ITEM OBTAINED --- {Soul_Totem-Path_of_Pain} at {Wanderer's_Journal-Kingdom's_Edge_Entrance}
+LOCATION CLEARED --- {Wanderer's_Journal-Kingdom's_Edge_Entrance}
+TRANSITION --- {Deepnest_East_07[bot1]} --> {Deepnest_14[right1]}
+TRANSITION --- {Deepnest_14[right1]} --> {Deepnest_17[right1]}
+TRANSITION --- {Deepnest_17[bot1]} --> {Fungus1_24[left1]}
+TRANSITION --- {Fungus1_24[left1]} --> {RestingGrounds_12[door_Mansion]}
+TRANSITION --- {RestingGrounds_12[door_Mansion]} --> {Fungus3_11[left1]}
+TRANSITION --- {Fungus3_11[left1]} --> {Mines_07[right1]}
+TRANSITION --- {Mines_07[right1]} --> {Ruins2_04[left1]}
+TRANSITION --- {Ruins2_04[left1]} --> {Mines_25[left1]}
+TRANSITION --- {Mines_25[left1]} --> {Deepnest_01[left1]}
+ITEM OBTAINED --- {Geo_Rock-Default} at {Geo_Rock-Moss_Prophet}
+LOCATION CLEARED --- {Geo_Rock-Moss_Prophet}
+ITEM OBTAINED --- {Geo_Rock-Deepnest} at {Geo_Rock-Moss_Prophet_Dupe}
+LOCATION CLEARED --- {Geo_Rock-Moss_Prophet_Dupe}
+TRANSITION --- {Deepnest_01[left1]} --> {Crossroads_04[right1]}
+TRANSITION --- {Crossroads_04[door_charmshop]} --> {Mines_17[right1]}
+TRANSITION --- {Mines_17[right1]} --> {Fungus2_29[bot1]}
+TRANSITION --- {Fungus2_29[bot1]} --> {Abyss_20[top1]}
+ITEM OBTAINED --- {Queen's_Gardens_Stag} at {Simple_Key-Basin}
+LOCATION CLEARED --- {Simple_Key-Basin}
+TRANSITION --- {Mines_17[left1]} --> {RestingGrounds_05[left2]}
+ITEM OBTAINED --- {Lore_Tablet-Howling_Cliffs} at {Soul_Totem-Resting_Grounds}
+LOCATION CLEARED --- {Soul_Totem-Resting_Grounds}
+TRANSITION --- {RestingGrounds_05[left1]} --> {Fungus2_02[right1]}
+LOCATION PREVIEWED --- {Queen's_Station_Stag}
+ITEM OBTAINED --- {Geo_Rock-Default} at {Dirtmouth_Stag}
+LOCATION CLEARED --- {Dirtmouth_Stag}
+LOCATION PREVIEWED --- {Queen's_Gardens_Stag}
+ITEM OBTAINED --- {Hallownest_Seal} at {Queen's_Gardens_Stag}
+LOCATION CLEARED --- {Queen's_Gardens_Stag}
+TRANSITION --- {Fungus3_40[right1]} --> {Crossroads_09[left1]}
+TRANSITION --- {Crossroads_09[left1]} --> {Ruins1_24[right1]}
+TRANSITION --- {Ruins1_24[right1]} --> {Deepnest_East_11[bot1]}
+TRANSITION --- {Deepnest_East_11[bot1]} --> {Crossroads_03[left2]}
+ITEM OBTAINED --- {Dream_Nail} at {Grub-Crossroads_Stag}
+LOCATION CLEARED --- {Grub-Crossroads_Stag}
+TRANSITION --- {Crossroads_03[right1]} --> {Fungus3_02[left1]}
+TRANSITION --- {Fungus3_02[left1]} --> {Deepnest_43[left1]}
+TRANSITION --- {Deepnest_43[left1]} --> {Fungus2_13[left3]}
+TRANSITION --- {Fungus2_13[left3]} --> {Deepnest_East_09[right1]}
+TRANSITION --- {Deepnest_East_09[right1]} --> {Waterways_13[left1]}
+TRANSITION --- {Waterways_13[left1]} --> {Waterways_04b[right1]}
+TRANSITION --- {Waterways_04b[right1]} --> {Fungus1_30[right1]}
+ITEM OBTAINED --- {Grub} at {Soul_Totem-Greenpath_Below_Toll}
+LOCATION CLEARED --- {Soul_Totem-Greenpath_Below_Toll}
+ITEM OBTAINED --- {Arcane_Egg} at {Lore_Tablet-Greenpath_Below_Toll}
+LOCATION CLEARED --- {Lore_Tablet-Greenpath_Below_Toll}
+TRANSITION --- {Fungus1_30[left1]} --> {Ruins1_17[top1]}
+LOCATION PREVIEWED --- {Whispering_Root-City}
+TRANSITION --- {Ruins1_17[bot1]} --> {Crossroads_43[right1]}
+TRANSITION --- {Crossroads_43[left1]} --> {Fungus2_01[left3]}
+TRANSITION --- {Fungus2_01[left3]} --> {Crossroads_08[left1]}
+ITEM OBTAINED --- {Geo_Chest-Junk_Pit_5} at {Geo_Rock-Crossroads_Aspid_Arena}
+LOCATION CLEARED --- {Geo_Rock-Crossroads_Aspid_Arena}
+ITEM OBTAINED --- {Geo_Rock-Default} at {Geo_Rock-Crossroads_Aspid_Arena_Dupe_1}
+LOCATION CLEARED --- {Geo_Rock-Crossroads_Aspid_Arena_Dupe_1}
+ITEM OBTAINED --- {Geo_Rock-Hive} at {Geo_Rock-Crossroads_Aspid_Arena_Dupe_2}
+LOCATION CLEARED --- {Geo_Rock-Crossroads_Aspid_Arena_Dupe_2}
+ITEM OBTAINED --- {Mask_Shard} at {Geo_Rock-Crossroads_Aspid_Arena_Hidden}
+LOCATION CLEARED --- {Geo_Rock-Crossroads_Aspid_Arena_Hidden}
+TRANSITION --- {Crossroads_08[right1]} --> {Fungus2_12[bot1]}
+ITEM OBTAINED --- {Deep_Focus} at {Lore_Tablet-Mantis_Outskirts}
+LOCATION CLEARED --- {Lore_Tablet-Mantis_Outskirts}
+TRANSITION --- {Fungus2_12[bot1]} --> {Deepnest_East_Hornet[left2]}
+TRANSITION --- {Deepnest_East_Hornet[left2]} --> {Fungus3_44[bot1]}
+TRANSITION --- {Fungus3_44[bot1]} --> {Fungus2_25[top1]}
+TRANSITION --- {Crossroads_03[left2]} --> {White_Palace_03_hub[bot1]}
+TRANSITION --- {White_Palace_03_hub[bot1]} --> {Fungus3_11[right1]}
+TRANSITION --- {Fungus3_11[right1]} --> {Ruins1_05c[bot1]}
+ITEM OBTAINED --- {Lore_Tablet-Fungal_Wastes_Hidden} at {Geo_Rock-City_of_Tears_Above_Lemm}
+LOCATION CLEARED --- {Geo_Rock-City_of_Tears_Above_Lemm}
+TRANSITION --- {Crossroads_03[bot1]} --> {Deepnest_26b[right2]}
+TRANSITION --- {Deepnest_26b[right2]} --> {Fungus3_50[right1]}
+TRANSITION --- {Fungus3_50[right1]} --> {Fungus3_35[right1]}
+TRANSITION --- {Fungus3_35[right1]} --> {Ruins2_11[right1]}
+TRANSITION --- {Ruins2_11[right1]} --> {Fungus1_06[left1]}
+ITEM OBTAINED --- {Rancid_Egg} at {Grub-Greenpath_Cornifer}
+LOCATION CLEARED --- {Grub-Greenpath_Cornifer}
+LOCATION PREVIEWED --- {Greenpath_Map}
+ITEM OBTAINED --- {Rancid_Egg} at {Greenpath_Map}
+LOCATION CLEARED --- {Greenpath_Map}
+TRANSITION --- {Fungus1_06[bot1]} --> {Fungus1_34[door1]}
+TRANSITION --- {Fungus1_34[door1]} --> {Ruins2_10b[left1]}
+TRANSITION --- {Ruins2_10b[left1]} --> {Fungus2_29[right1]}
+TRANSITION --- {Fungus2_29[right1]} --> {Ruins_House_03[left2]}
+TRANSITION --- {Ruins_House_03[left2]} --> {Deepnest_East_11[top1]}
+TRANSITION --- {Deepnest_East_11[right1]} --> {Fungus2_06[right1]}
+TRANSITION --- {Fungus2_06[right1]} --> {Deepnest_03[top1]}
+ITEM OBTAINED --- {Geo_Rock-Default} at {Geo_Rock-Deepnest_Spike_Grub_Right}
+LOCATION CLEARED --- {Geo_Rock-Deepnest_Spike_Grub_Right}
+ITEM OBTAINED --- {Geo_Rock-Fung01} at {Geo_Rock-Deepnest_Below_Spike_Grub}
+LOCATION CLEARED --- {Geo_Rock-Deepnest_Below_Spike_Grub}
+ITEM OBTAINED --- {Vengeful_Spirit} at {Geo_Rock-Deepnest_Below_Spike_Grub_Dupe}
+LOCATION CLEARED --- {Geo_Rock-Deepnest_Below_Spike_Grub_Dupe}
+TRANSITION --- {Deepnest_03[left1]} --> {Fungus2_28[left1]}
+TRANSITION --- {Fungus2_28[left1]} --> {Town[room_divine]}
+TRANSITION --- {Town[room_divine]} --> {Fungus1_01b[left1]}
+ITEM OBTAINED --- {Godtuner} at {Geo_Rock-Greenpath_Waterfall}
+LOCATION CLEARED --- {Geo_Rock-Greenpath_Waterfall}
+TRANSITION --- {Fungus1_01b[left1]} --> {Crossroads_50[left1]}
+TRANSITION --- {Crossroads_50[left1]} --> {Abyss_Lighthouse_room[left1]}
+TRANSITION --- {Abyss_Lighthouse_room[left1]} --> {Cliffs_01[right3]}
+ITEM OBTAINED --- {Wanderer's_Journal} at {King's_Idol-Cliffs}
+LOCATION CLEARED --- {King's_Idol-Cliffs}
+LOCATION PREVIEWED --- {Whispering_Root-Howling_Cliffs}
+LOCATION PREVIEWED --- {Whispering_Root-Howling_Cliffs}
+TRANSITION --- {Cliffs_01[right3]} --> {Deepnest_01b[top1]}
+LOCATION PREVIEWED --- {Deepnest_Map-Upper}
+ITEM OBTAINED --- {Geo_Rock-Mine} at {Deepnest_Map-Upper}
+LOCATION CLEARED --- {Deepnest_Map-Upper}
+TRANSITION --- {Deepnest_01b[bot1]} --> {Ruins1_32[right1]}
+TRANSITION --- {Ruins1_32[right1]} --> {Room_nailmaster_02[left1]}
+LOCATION PREVIEWED --- {Great_Slash}
+ITEM OBTAINED --- {Mask_Shard} at {Great_Slash}
+LOCATION CLEARED --- {Great_Slash}
+TRANSITION --- {Room_nailmaster_02[left1]} --> {Mines_28[door1]}
+ITEM OBTAINED --- {Grub} at {Soul_Totem-Outside_Crystallized_Mound}
+LOCATION CLEARED --- {Soul_Totem-Outside_Crystallized_Mound}
+TRANSITION --- {Mines_28[door1]} --> {Fungus2_15[left1]}
+TRANSITION --- {Fungus2_15[left1]} --> {Crossroads_09[right1]}
