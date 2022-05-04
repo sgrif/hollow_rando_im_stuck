@@ -65,7 +65,11 @@ impl Manager {
                         },
                     )
                 });
-        let items = items.chain(vanilla_items).into_group_map().into_iter().collect();
+        let items = items
+            .chain(vanilla_items)
+            .into_group_map()
+            .into_iter()
+            .collect();
 
         let mut acquired = HashMap::default();
         acquired.insert("TRUE".into(), 1);
@@ -217,7 +221,9 @@ impl Manager {
     }
 
     fn already_unlocked(&self, location: &str) -> bool {
-        let unlocked_target = self.transitions.get(location)
+        let unlocked_target = self
+            .transitions
+            .get(location)
             .map(|loc| self.acquired_amount(loc) != 0)
             .unwrap_or(true);
         let unlocked_source = self.acquired_amount(location) != 0;
