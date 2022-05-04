@@ -1,4 +1,4 @@
-import * as wasm from "../wasm/Cargo.toml";
+import * as wasm from "./pkg/hollow_rando_im_stuck_wasm.js";
 import { fileOpen } from "browser-fs-access";
 import { get, set } from "idb-keyval";
 
@@ -83,6 +83,7 @@ async function render_file_status() {
 }
 
 (async () => {
+  await wasm.default();
   window.files = await Files.try_deserialize();
   await render_file_status();
 

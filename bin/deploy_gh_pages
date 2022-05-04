@@ -1,9 +1,11 @@
 #!/bin/bash
 
+set -e
+
 if [ -z "$(git status --porcelain)" ]; then
   git checkout gh-pages
   git reset --hard main
-  (cd wasm && wasm-pack build --release)
+  (cd www && bin/build_wasm)
   (cd www && rm -rf dist && npm run build)
   mv www/dist/* .
   git add .
