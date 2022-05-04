@@ -1,4 +1,4 @@
-import * as wasm from "hollow-rando-im-stuck";
+import * as wasm from "../wasm/Cargo.toml";
 import { fileOpen } from "browser-fs-access";
 import { get, set } from "idb-keyval";
 
