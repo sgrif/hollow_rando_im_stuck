@@ -1,7 +1,7 @@
 use super::Condition;
 use crate::spoiler_log::{Cost, Effects, RawSpoiler, VanillaPlacement};
 use itertools::Itertools;
-use std::collections::{HashMap, HashSet};
+use rustc_hash::{FxHashMap as HashMap, FxHashSet as HashSet};
 use std::error::Error;
 use std::rc::Rc;
 
@@ -65,9 +65,9 @@ impl Manager {
                         },
                     )
                 });
-        let items = items.chain(vanilla_items).into_group_map();
+        let items = items.chain(vanilla_items).into_group_map().into_iter().collect();
 
-        let mut acquired = HashMap::new();
+        let mut acquired = HashMap::default();
         acquired.insert("TRUE".into(), 1);
         acquired.insert(format!("$StartLocation[{}]", spoiler.start_def.name), 1);
         for setter in spoiler.initial_progression.setters {
@@ -284,7 +284,7 @@ pub struct CostUnlock {
 
 #[test]
 fn unaffordable_costs() {
-    let mut locations = HashMap::new();
+    let mut locations = HashMap::default();
     locations.insert(
         "Grubfather".into(),
         Condition::GreaterThan("Crossroads_38[right1]".into(), 0),
@@ -297,7 +297,7 @@ fn unaffordable_costs() {
         "More important place".into(),
         Condition::GreaterThan("Newer place".into(), 0),
     );
-    let mut items = HashMap::new();
+    let mut items = HashMap::default();
     items.insert(
         "Grubfather".into(),
         vec![
@@ -331,7 +331,7 @@ fn unaffordable_costs() {
             },
         ],
     );
-    let mut acquired = HashMap::new();
+    let mut acquired = HashMap::default();
     acquired.insert("Crossroads_38[right1]".into(), 1);
     let mut manager = Manager {
         locations: Rc::new(locations),

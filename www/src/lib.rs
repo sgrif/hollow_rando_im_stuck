@@ -2,9 +2,6 @@ use wasm_bindgen::prelude::*;
 use hollow_rando_im_stuck::Settings;
 use std::str;
 
-#[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
-
 #[wasm_bindgen]
 extern {
     fn alert(s: &str);
