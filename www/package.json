@@ -2,7 +2,7 @@
   "name": "hollow-rando-im-stuck",
   "version": "0.1.0",
   "scripts": {
-    "build": "parcel build index.html",
+    "build": "parcel build index.html --public-url .",
     "start": "parcel index.html"
   },
   "author": "Sage Griffin <sage@sagetheprogrammer.com>",
