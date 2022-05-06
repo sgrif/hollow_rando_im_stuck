@@ -87,23 +87,15 @@ impl Manager {
             acquired,
         };
 
-        for item_id in result.picked_up.clone() {
-            let item = result
-                .items
-                .values()
-                .flatten()
-                .find(|item| item.id == item_id)
-                .ok_or_else(|| format!("Could not find item with id {}", item_id))?;
-            item.effects.clone().apply(&mut result);
-        }
-
-        for item in result.items.get("Start").unwrap().to_vec() {
-            if result.picked_up.contains(&item.id) {
-                continue;
-            }
-
-            item.effects.apply(&mut result);
-            result.picked_up.insert(item.id);
+        let picked_up_effects = result
+            .items
+            .iter()
+            .flat_map(|(location, items)| items.iter().map(move |item| (location, item)))
+            .filter(|(location, item)| *location == "Start" || result.picked_up.contains(&item.id))
+            .map(|(_, item)| item.effects.clone())
+            .collect_vec();
+        for effects in picked_up_effects {
+            effects.apply(&mut result);
         }
 
         result.unlock_location(spoiler.start_def.transition);
