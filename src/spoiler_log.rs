@@ -106,33 +106,6 @@ impl Effects {
         })
     }
 
-    pub(crate) fn has_same_effect_as(&self, other: &Effects) -> bool {
-        use Effects::*;
-
-        match (self, other) {
-            (Single { effect: left }, Single { effect: right }) => left == right,
-            (Multiple { effects: left }, Multiple { effects: right }) => left == right,
-            (
-                MultiItem {
-                    logic: left_logic,
-                    true_item: left_true,
-                    false_item: left_false,
-                },
-                MultiItem {
-                    logic: right_logic,
-                    true_item: right_true,
-                    false_item: right_false,
-                },
-            ) => {
-                left_logic.logic == right_logic.logic
-                    && left_true.effects.has_same_effect_as(&right_true.effects)
-                    && left_false.effects.has_same_effect_as(&right_false.effects)
-            }
-            (None {}, None {}) => true,
-            _ => false,
-        }
-    }
-
     fn for_each_effect(&self, lm: &mut logic::Manager, f: impl Fn(&Effect, &mut logic::Manager)) {
         match self {
             Self::Single { effect } => f(effect, lm),

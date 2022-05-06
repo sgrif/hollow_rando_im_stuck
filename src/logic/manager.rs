@@ -1,5 +1,6 @@
 use super::Condition;
 use crate::spoiler_log::{Cost, Effects, RawSpoiler, VanillaPlacement};
+use crate::tracker_data::TrackerData;
 use itertools::Itertools;
 use rustc_hash::{FxHashMap as HashMap, FxHashSet as HashSet};
 use std::error::Error;
@@ -20,7 +21,7 @@ pub struct Manager {
 impl Manager {
     pub(crate) fn new(
         spoiler: RawSpoiler,
-        collected: Vec<(String, String)>,
+        tracker_data: TrackerData,
     ) -> Result<Self, Box<dyn Error>> {
         let locations = spoiler
             .logic_manager
@@ -82,41 +83,18 @@ impl Manager {
             locations: Rc::new(locations),
             items: Rc::new(items),
             transitions: Rc::new(transitions),
-            picked_up: Default::default(),
+            picked_up: tracker_data.obtained_items,
             acquired,
         };
 
-        for (item_name, location) in collected {
-            if item_name.starts_with("100_Geo-") {
-                continue;
-            }
-
+        for item_id in result.picked_up.clone() {
             let item = result
-                .find_item(Some(&location), |item| item.name == item_name)
-                .map(Ok)
-                .unwrap_or_else(|| {
-                    let item = result
-                        .find_item(None, |item| item.name == item_name)
-                        .ok_or_else(|| {
-                            format!(
-                                "Tracker Log indicated {} was picked up, but no item with that name was found",
-                                item_name
-                            )
-                        })?;
-                    result
-                        .find_item(Some(&location), |other| {
-                            item.effects.has_same_effect_as(&other.effects)
-                        })
-                        .ok_or_else(|| {
-                            format!(
-                                "Could not find an item at {} with the same effects as {}",
-                                location, item_name
-                            )
-                        })
-                })?;
-            let id = item.id;
+                .items
+                .values()
+                .flatten()
+                .find(|item| item.id == item_id)
+                .ok_or_else(|| format!("Could not find item with id {}", item_id))?;
             item.effects.clone().apply(&mut result);
-            result.picked_up.insert(id);
         }
 
         for item in result.items.get("Start").unwrap().to_vec() {
@@ -251,18 +229,6 @@ impl Manager {
             self.acquire(connected, 1);
         }
         self.acquire(location, 1);
-    }
-
-    fn find_item(
-        &self,
-        location: Option<&str>,
-        pattern: impl FnMut(&&Item) -> bool,
-    ) -> Option<&Item> {
-        if let Some(location) = location {
-            self.items_at(location).iter().find(pattern)
-        } else {
-            self.items.values().flatten().find(pattern)
-        }
     }
 }
 

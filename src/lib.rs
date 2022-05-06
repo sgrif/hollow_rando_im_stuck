@@ -4,13 +4,13 @@ use std::io::BufReader;
 
 pub(crate) mod logic;
 pub(crate) mod spoiler_log;
-mod tracker_log;
+pub(crate) mod tracker_data;
 
 pub struct Settings<T: Read> {
     /// A handle to read `RawSpoiler.json`
     pub raw_spoiler: T,
-    /// A handle to read `TrackerLog.txt`
-    pub tracker_log: T,
+    /// A handle to read `TrackerData.json`
+    pub tracker_data: T,
     /// When enabled, lists the locations unlocked by each item, rather than only showing a count
     pub show_unlocked_locations: bool,
     /// When enabled, shows the name of the item at each location.
@@ -20,7 +20,7 @@ pub struct Settings<T: Read> {
 pub fn run(output: &mut impl Write, settings: Settings<impl Read>) -> Result<(), Box<dyn Error>> {
     let logic_manager = logic::Manager::new(
         serde_json::from_reader(BufReader::new(settings.raw_spoiler))?,
-        tracker_log::read(settings.tracker_log)?,
+        serde_json::from_reader(settings.tracker_data)?,
     )?;
 
     let mut key_items = logic_manager.reachable_key_items();
@@ -82,10 +82,10 @@ fn integration() -> Result<(), Box<dyn Error>> {
     for entry in fs::read_dir(root_path.join("test_data"))? {
         let path = entry?.path();
         let raw_spoiler = File::open(path.join("RawSpoiler.json"))?;
-        let tracker_log = File::open(path.join("TrackerLog.txt"))?;
+        let tracker_data = File::open(path.join("TrackerData.json"))?;
         let settings = Settings {
             raw_spoiler,
-            tracker_log,
+            tracker_data,
             show_unlocked_locations: true,
             show_items: true,
         };

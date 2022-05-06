@@ -10,13 +10,13 @@ extern {
 #[wasm_bindgen]
 pub fn run(
     raw_spoiler: &[u8],
-    tracker_log: &[u8],
+    tracker_data: &[u8],
     show_items: bool,
     show_unlocked_locations: bool,
 ) -> Option<String> {
     let settings = Settings {
         raw_spoiler,
-        tracker_log,
+        tracker_data,
         show_items,
         show_unlocked_locations,
     };

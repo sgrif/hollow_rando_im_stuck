@@ -8,23 +8,23 @@ let show_items_cb = document.querySelector("#show_items");
 let show_unlocked_locations_cb = document.querySelector("#show_unlocked_locations");
 let output = document.querySelector("#output");
 let raw_spoiler_status = document.querySelector("#raw_spoiler_status");
-let tracker_log_status = document.querySelector("#tracker_log_status");
+let tracker_data_status = document.querySelector("#tracker_data_status");
 
 class Files {
   static async try_deserialize() {
     let files = new Files;
     files.raw_spoiler = await File.try_deserialize("RawSpoiler.json");
-    files.tracker_log = await File.try_deserialize("TrackerLog.txt");
+    files.tracker_data = await File.try_deserialize("TrackerData.json");
     return files;
   }
 
   async open_picker() {
     let files = await fileOpen({
-      description: "RawSpoiler.json and TrackerLog.txt",
+      description: "RawSpoiler.json and TrackerData.json",
       multiple: true
     });
     await this.raw_spoiler.find_in_list(files);
-    await this.tracker_log.find_in_list(files);
+    await this.tracker_data.find_in_list(files);
   }
 }
 
@@ -76,10 +76,10 @@ class File {
 
 async function render_file_status() {
   let raw_spoiler_available = await files.raw_spoiler.is_available();
-  let tracker_log_available = await files.tracker_log.is_available();
+  let tracker_data_available = await files.tracker_data.is_available();
   raw_spoiler_status.innerHTML = await files.raw_spoiler.status();
-  tracker_log_status.innerHTML = await files.tracker_log.status();
-  run_button.disabled = !(raw_spoiler_available && tracker_log_available);
+  tracker_data_status.innerHTML = await files.tracker_data.status();
+  run_button.disabled = !(raw_spoiler_available && tracker_data_available);
 }
 
 (async () => {
@@ -95,7 +95,7 @@ async function render_file_status() {
   run_button.addEventListener("click", async function() {
     output.innerHTML = wasm.run(
       await files.raw_spoiler.get_data(),
-      await files.tracker_log.get_data(),
+      await files.tracker_data.get_data(),
       show_items_cb.checked,
       show_unlocked_locations_cb.checked,
     );

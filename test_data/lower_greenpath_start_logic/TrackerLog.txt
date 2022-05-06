@@ -1,4 +1,0 @@
-Starting tracker log for new randomizer file.
-
-ITEM OBTAINED --- {538_Geo} at {Start}
-LOCATION CLEARED --- {Start}

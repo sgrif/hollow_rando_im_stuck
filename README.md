@@ -13,7 +13,7 @@ Use it from the browser
 
 Visit https://sgrif.github.io/hollow_rando_im_stuck/, click "Select
 Files", select `RawSpoilerLog.json` and
-`TrackerLog.txt`, and then click "Run"
+`TrackerData.json`, and then click "Run"
 
 Use it from the command line
 ---
@@ -26,7 +26,7 @@ On Windows with the default save locations, this would look like
 (replace Recent with user1-4 for specific save slots)
 
 The path must be a directory containing `RawSpoilerLog.json` and
-`TrackerLog.txt`
+`TrackerData.json`
 
 By default, the tool will tell you the locations you should check, and how many
 new locations will be unlocked by checking it. For example, "Getting the item at

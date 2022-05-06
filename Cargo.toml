@@ -20,4 +20,5 @@ serde_json = "1.0.0"
 pretty_assertions = "1.2.1"
 
 [features]
+default = ["binary"]
 binary = ["clap"]
